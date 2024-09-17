@@ -1,11 +1,10 @@
 """Main module"""
-import os
+import os, sys, subprocess
 
 import customtkinter
 import api as req
 # from client import requests
 # import requests
-
 
 class Main(customtkinter.CTk):
     """Main class"""
@@ -21,7 +20,25 @@ class Main(customtkinter.CTk):
         self.geometry(self.GEOMETRY)
         customtkinter.set_appearance_mode("dark")
 
+        self.get_hwid()
         self.request = req.Api()
+
+    def run_cmd(self, cmd):
+        """Runs a command"""
+        try:
+            res = subprocess.run(cmd, shell=True, check=True, capture_output=True, encoding="UTF-8")
+            return res.stdout().strip()
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+            return None
+
+    def get_hwid(self):
+        """Get id method"""
+        if sys.platform.startswith('linux'):
+            return self.run_cmd('cat /etc/machine-id') or \
+                   self.run_cmd('cat /var/lib/dbus/machine-id')
+
+        if sys.platform in ['win32', 'cygwin', 'msys']:
+            return self.run_cmd('wmic csproduct get uuid').split('\n')[2].strip()
 
     def heartbeat(self):
         """Heartbeat method"""
