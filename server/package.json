@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mapg23/programvaruprojekt/issues"
   },
-  "homepage": "https://github.com/mapg23/programvaruprojekt#readme"
+  "homepage": "https://github.com/mapg23/programvaruprojekt#readme",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
 }
