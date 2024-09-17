@@ -1,5 +1,4 @@
 """Main module"""
-import os
 import customtkinter
 
 # Local import
@@ -20,9 +19,7 @@ class Main(customtkinter.CTk):
         self.geometry(self.app_geometry)
         customtkinter.set_appearance_mode("dark")
 
-        print(utils.run_cmd('cat /etc/machine-id').stdout)
-
-        # self.hwid = utils.get_hwid()
+        self.hwid = utils.get_hwid()
         self.request = req.Api()
 
     def heartbeat(self):

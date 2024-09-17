@@ -6,7 +6,7 @@ def run_cmd(cmd):
     """Function to execute commands on all systems."""
     try:
         res = subprocess.run(cmd, shell=True, check=True, capture_output=True, encoding="UTF-8")
-        return res
+        return res.stdout
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
         return None
 
