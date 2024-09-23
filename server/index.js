@@ -8,7 +8,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/heartbeat', (req, res) => {
-    res.send("confirmed");
+    console.log(req.ip);
+    res.send("online");
 });
 
 app.listen(port, () => {
