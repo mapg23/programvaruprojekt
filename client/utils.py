@@ -1,6 +1,5 @@
 """Utils module."""
 import subprocess
-import winreg
 import sys
 
 def run_cmd(cmd):
