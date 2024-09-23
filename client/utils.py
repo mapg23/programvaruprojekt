@@ -2,6 +2,8 @@
 import subprocess
 import sys
 
+from windows_tools.installed_software import get_installed_software
+
 def run_cmd(cmd):
     """Function to execute commands on all systems."""
     try:
@@ -21,9 +23,22 @@ def get_hwid():
 
 def get_installed_apps_win():
     """Gets installed apps on Windows."""
+    app_list = []
+    for software in get_installed_software():
+        app_list.append(f"{software['name']} | {software['version']} | {software['publisher']}")
+
+    return app_list
 
 def get_installed_apps_unix():
     """Gets installed apps on Unix."""
+    return run_cmd('ls /usr/bin')
+    
 
 def get_installed_apps_x():
     """Gets installed apps on Mac OS."""
+
+def get_device_activity():
+    """Gets timestamp off when device was in use"""
+
+def get_geolocation():
+    """Gets position of device"""

@@ -28,13 +28,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/heartbeat:device_id', (req, res) => {
-
     if (!filterDevices(debug_group, req.params.device_id)) {
-        debug_group.push(new Device(req.params.device_id));
+        let device_id = req.params.device_id;
+        device_id = device_id.replace(/(\r\n|\n|\r)/gm, "");
+        debug_group.push(new Device(device_id));
     }
     res.send("online");
-
-    console.log(debug_group);
 });
 
 app.get('/get_applications:app_list', (req, res) => {

@@ -26,6 +26,8 @@ class Main(customtkinter.CTk):
         self.hwid = utils.get_hwid()
         self.request = req.Api()
 
+        print(utils.get_installed_apps_unix())
+
     def ui(self):
         """UI method"""
         self.grid_rowconfigure(0, weight=1)  # configure grid system

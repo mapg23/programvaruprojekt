@@ -5,4 +5,8 @@ darkdetect==0.8.0
 idna==3.10
 packaging==24.1
 requests==2.32.3
+typing==3.7.4.3
 urllib3==2.2.3
+windows-tools.installed-software==0.5.4
+windows-tools.misc==1.0.0
+windows-tools.registry==1.1.0
