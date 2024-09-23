@@ -9,7 +9,7 @@ class Dashboard(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
 
         # add widgets onto the frame, for example:
-        self.label = customtkinter.CTkLabel(self, text="Hello")
+        self.label = customtkinter.CTkLabel(self, text="Server status: no status")
         self.label.grid(row=0, column=0, padx=20)
 
     def change_server_status(self, status):

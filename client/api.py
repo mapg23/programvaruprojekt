@@ -9,10 +9,10 @@ class Api:
     def __init__(self):
         """init"""
 
-    def call_heart_beat(self, timeout=2000):
+    def call_heart_beat(self, device_id, timeout=2000):
         """Call to api for heartbeat"""
         try:
-            requests.get(url=f"{self.BASEURL}:{self.PORT}/heartbeat", timeout=timeout)
+            requests.get(url=f"{self.BASEURL}:{self.PORT}/heartbeat:{device_id}", timeout=timeout)
             return "Online"
         except (requests.ConnectionError):
             return "Offline"

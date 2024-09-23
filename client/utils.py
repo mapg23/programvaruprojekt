@@ -1,5 +1,6 @@
 """Utils module."""
 import subprocess
+import winreg
 import sys
 
 def run_cmd(cmd):
@@ -18,3 +19,12 @@ def get_hwid():
 
     if sys.platform in ['win32', 'cygwin', 'msys']:
         return run_cmd('wmic csproduct get uuid').split('\n')[2].strip()
+
+def get_installed_apps_win():
+    """Gets installed apps on Windows."""
+
+def get_installed_apps_unix():
+    """Gets installed apps on Unix."""
+
+def get_installed_apps_x():
+    """Gets installed apps on Mac OS."""

@@ -38,7 +38,7 @@ class Main(customtkinter.CTk):
     
     def heartbeat(self):
         """Heartbeat method"""
-        self.server_status = self.request.call_heart_beat()
+        self.server_status = self.request.call_heart_beat(self.hwid)
         self.dashboard.change_server_status(self.server_status)
 
         self.after(self.interval, self.heartbeat)
