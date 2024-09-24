@@ -41,7 +41,6 @@ def get_installed_apps_unix():
 
     return apps
 
-
 def get_installed_apps_x():
     """Gets installed apps on Mac OS."""
 

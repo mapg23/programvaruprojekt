@@ -5,7 +5,6 @@ import tkinter
 import customtkinter
 import utils
 
-
 from windows import DeviceWindow, AppWindow, CommandWindow, LogsWindow
 
 
@@ -30,7 +29,7 @@ class Main(customtkinter.CTk):
         # self._set_appearance_mode("dark")
         customtkinter.set_appearance_mode('dark')
         customtkinter.set_default_color_theme('dark-blue')
-        
+
         #ui
         self.create_ui()
         self.toplevel_window = None
@@ -47,8 +46,8 @@ class Main(customtkinter.CTk):
 
         self.button_watchlist = utils.create_button(self, "Add to watchlist")
 
-        self.button_device_info = utils.create_button(self, "Device info", partial(self.open_window, 1))
-        self.button_app_info = utils.create_button(self, "Application list", partial(self.open_window, 2))
+        self.button_device = utils.create_button(self, "Device info", partial(self.open_window, 1))
+        self.button_apps = utils.create_button(self, "App list", partial(self.open_window, 2))
         self.button_cmd = utils.create_button(self, "Cmd", partial(self.open_window, 3))
         self.button_logs = utils.create_button(self, "Logs", partial(self.open_window, 4))
 
