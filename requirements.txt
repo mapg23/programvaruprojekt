@@ -10,3 +10,4 @@ urllib3==2.2.3
 windows-tools.installed-software==0.5.4
 windows-tools.misc==1.0.0
 windows-tools.registry==1.1.0
+winregistry==1.1.1

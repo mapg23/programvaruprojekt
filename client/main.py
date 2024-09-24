@@ -1,48 +1,66 @@
 """Main module"""
-import customtkinter
+from functools import partial
 
-# Local import
-import api as req
+import tkinter
+import customtkinter
 import utils
 
-import ui.dashboard as dashboard
+
+from windows import DeviceWindow, AppWindow, CommandWindow, LogsWindow
+
 
 class Main(customtkinter.CTk):
     """Main class"""
     app_title = "Application"
     app_geometry = "800x600"
+
     interval = 5000
-    server_status = "offline"
+
+    windows = {
+        1: DeviceWindow,
+        2: AppWindow,
+        3: CommandWindow,
+        4: LogsWindow
+    }
 
     def __init__(self):
         super().__init__()
-
         self.title(self.app_title)
         self.geometry(self.app_geometry)
-        customtkinter.set_appearance_mode("dark")
+        # self._set_appearance_mode("dark")
+        customtkinter.set_appearance_mode('dark')
+        customtkinter.set_default_color_theme('dark-blue')
+        
+        #ui
+        self.create_ui()
+        self.toplevel_window = None
 
-        self.ui()
+        #logic
 
-        self.hwid = utils.get_hwid()
-        self.request = req.Api()
+    def create_ui(self):
+        """Method to create the ui"""
+        self.notification_label = customtkinter.CTkLabel(self, text="")
+        self.notification_label.pack(padx=10, pady=10)
 
-        print(utils.get_installed_apps_unix())
+        self.server_status_label = customtkinter.CTkLabel(self, text="Server status:")
+        self.server_status_label.pack(padx=10, pady=10)
 
-    def ui(self):
-        """UI method"""
-        self.grid_rowconfigure(0, weight=1)  # configure grid system
-        self.grid_columnconfigure(0, weight=1)
+        self.button_watchlist = utils.create_button(self, "Add to watchlist")
 
-        self.dashboard = dashboard.Dashboard(master=self)
-        self.dashboard.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.button_device_info = utils.create_button(self, "Device info", partial(self.open_window, 1))
+        self.button_app_info = utils.create_button(self, "Application list", partial(self.open_window, 2))
+        self.button_cmd = utils.create_button(self, "Cmd", partial(self.open_window, 3))
+        self.button_logs = utils.create_button(self, "Logs", partial(self.open_window, 4))
 
-    
-    
+    def open_window(self, window_id):
+        """Method to open window"""
+        if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
+            self.toplevel_window = self.windows[window_id](self)
+        else:
+            self.toplevel_window.focus()
+
     def heartbeat(self):
         """Heartbeat method"""
-        self.server_status = self.request.call_heart_beat(self.hwid)
-        self.dashboard.change_server_status(self.server_status)
-
         self.after(self.interval, self.heartbeat)
 
 if __name__ == '__main__':

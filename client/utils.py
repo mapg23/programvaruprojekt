@@ -2,7 +2,7 @@
 import subprocess
 import sys
 
-from windows_tools.installed_software import get_installed_software
+import customtkinter
 
 def run_cmd(cmd):
     """Function to execute commands on all systems."""
@@ -11,6 +11,16 @@ def run_cmd(cmd):
         return res.stdout
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
         return None
+
+def create_button(master, text, command=None, padx=10, pady=10):
+    """Method to create a ctk button."""
+    if command is None:
+        button = customtkinter.CTkButton(master=master, text=text)
+        button.pack(padx=padx, pady=pady)
+    else:
+        button = customtkinter.CTkButton(master=master, text=text, command=command)
+        button.pack(padx=padx, pady=pady)
+    return button
 
 def get_hwid():
     """Gets os id."""
@@ -23,16 +33,14 @@ def get_hwid():
 
 def get_installed_apps_win():
     """Gets installed apps on Windows."""
-    app_list = []
-    for software in get_installed_software():
-        app_list.append(f"{software['name']} | {software['version']} | {software['publisher']}")
-
-    return app_list
 
 def get_installed_apps_unix():
     """Gets installed apps on Unix."""
-    return run_cmd('ls /usr/bin')
-    
+    installed_apps = run_cmd('ls /usr/bin')
+    apps = installed_apps.split()
+
+    return apps
+
 
 def get_installed_apps_x():
     """Gets installed apps on Mac OS."""
