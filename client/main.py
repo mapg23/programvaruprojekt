@@ -4,6 +4,7 @@ from functools import partial
 import tkinter
 import customtkinter
 import utils
+import api
 
 from windows import DeviceWindow, AppWindow, CommandWindow, LogsWindow
 
@@ -35,6 +36,9 @@ class Main(customtkinter.CTk):
         self.toplevel_window = None
 
         #logic
+        self.server_status = ""
+        self.api = api.Api()
+
 
     def create_ui(self):
         """Method to create the ui"""
@@ -60,7 +64,10 @@ class Main(customtkinter.CTk):
 
     def heartbeat(self):
         """Heartbeat method"""
-        self.after(self.interval, self.heartbeat)
+        self.server_status = self.api.call_heart_beat(utils.get_hwid())
+        self.server_status_label.configure(text=self.server_status)
+
+        self.after(self.interval, f"Server status: {self.server_status}")
 
 if __name__ == '__main__':
     app = Main()
