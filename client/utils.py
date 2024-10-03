@@ -31,12 +31,20 @@ def get_hwid():
     if sys.platform in ['win32', 'cygwin', 'msys']:
         return run_cmd('wmic csproduct get uuid').split('\n')[2].strip()
 
+def get_os():
+    """Determines if os is of unix or windows"""
+    if sys.platform.startswith('linux'):
+        return "linux"
+    if sys.platform in ['win32', 'cygwin', 'msys']:
+        return "windows"
+    return "unknown"
+
 def get_installed_apps_win():
     """Gets installed apps on Windows."""
 
 def get_installed_apps_unix():
     """Gets installed apps on Unix."""
-    installed_apps = run_cmd('ls /usr/bin')
+    installed_apps = run_cmd('ls /usr/share/applications')
     apps = installed_apps.split()
 
     return apps

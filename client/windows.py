@@ -1,6 +1,8 @@
 import customtkinter
+
 import api
 import utils
+import frames
 
 class DeviceWindow(customtkinter.CTkToplevel):
     """Device info class"""
@@ -8,6 +10,11 @@ class DeviceWindow(customtkinter.CTkToplevel):
         super().__init__(*args, **kwargs)
         self.geometry("250x400")
         self.title("Device Info")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+        
+        self.device_frame = frames.DeviceListFrame(self, data=["OS: Linux", "Version: v10.0"])
+        self.device_frame.grid(row=0, column=0, padx=10, pady=(10,0), sticky="nsew")
 
 class AppWindow(customtkinter.CTkToplevel):
     """App info class"""
@@ -15,21 +22,16 @@ class AppWindow(customtkinter.CTkToplevel):
         super().__init__(*args, **kwargs)
         self.geometry("250x400")
         self.title("App Info")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
 
-        self.app_list = utils.get_installed_apps_unix()
+        if utils.get_os() == "linux":
+            apps = utils.get_installed_apps_unix()
+        else:
+            apps = utils.get_installed_apps_win()
 
-        print(self.app_list)
-
-        # self.scroll_frame = customtkinter.CTkScrollableFrame(self, width=230, height=400)
-        # self.scroll_frame.grid(row=0, column=0, padx=0, pady=0)
-
-        # counter = 0
-        # for app in self.app_list:
-        #     label = customtkinter.CTkLabel(self.scroll_frame, text=app)
-        #     label.grid(row=counter, column=0, pady=10)
-        #     counter += 1
-
-
+        self.scrollable_checkbox_frame = frames.AppListFrame(self, title="Applications", values=apps)
+        self.scrollable_checkbox_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsew")
 
 
 class CommandWindow(customtkinter.CTkToplevel):

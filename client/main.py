@@ -1,5 +1,6 @@
 """Main module"""
 from functools import partial
+import atexit
 
 import tkinter
 import customtkinter
@@ -13,6 +14,7 @@ class Main(customtkinter.CTk):
     """Main class"""
     app_title = "Application"
     app_geometry = "800x600"
+    in_watchlist = False
 
     interval = 5000
 
@@ -36,9 +38,9 @@ class Main(customtkinter.CTk):
         self.toplevel_window = None
 
         #logic
+
         self.server_status = ""
         self.api = api.Api()
-
 
     def create_ui(self):
         """Method to create the ui"""
@@ -48,7 +50,7 @@ class Main(customtkinter.CTk):
         self.server_status_label = customtkinter.CTkLabel(self, text="Server status:")
         self.server_status_label.pack(padx=10, pady=10)
 
-        self.button_watchlist = utils.create_button(self, "Add to watchlist")
+        self.button_watchlist = utils.create_button(self, "Add to watchlist", command=self.add_watchlist)
 
         self.button_device = utils.create_button(self, "Device info", partial(self.open_window, 1))
         self.button_apps = utils.create_button(self, "App list", partial(self.open_window, 2))
@@ -62,14 +64,24 @@ class Main(customtkinter.CTk):
         else:
             self.toplevel_window.focus()
 
+    def add_watchlist(self):
+        """Watchlist"""
+        self.api.call_with_param("add_to_watch_list", utils.get_hwid())
+
     def heartbeat(self):
         """Heartbeat method"""
         self.server_status = self.api.call_heart_beat(utils.get_hwid())
-        self.server_status_label.configure(text=self.server_status)
+        self.server_status_label.configure(text=f"Server status: {self.server_status}")
+        # self.after(self.interval, f"Server status: {self.server_status}")
 
-        self.after(self.interval, f"Server status: {self.server_status}")
+    def on_dispose(self):
+        """Exit method"""
+        print("exit")
 
 if __name__ == '__main__':
     app = Main()
-    app.after(app.interval, app.heartbeat)
-    app.mainloop()
+    try:
+        app.after(app.interval, app.heartbeat)
+        app.mainloop()
+    finally:
+        app.on_dispose()

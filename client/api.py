@@ -24,3 +24,11 @@ class Api:
             return req.status_code
         except (requests.ConnectionError):
             return "Error server offline"
+
+    def call_with_param(self, route, param, timeout=2000):
+        """Calls api with parameter."""
+        try:
+            req = requests.get(url=f"{self.BASEURL}:{self.PORT}/{route}:{param}", timeout=timeout)
+            return req.text
+        except(requests.ConnectionError):
+            return "Error, server offline"

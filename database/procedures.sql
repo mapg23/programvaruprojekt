@@ -1,6 +1,5 @@
 USE security_app;
 
-
 DROP PROCEDURE IF EXISTS add_device;
 DELIMITER ;;
 CREATE PROCEDURE add_device(
@@ -21,6 +20,29 @@ BEGIN
     ;
 
     COMMIT; 
+END
+;;
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS add_app;
+DELIMITER ;;
+CREATE PROCEDURE add_app(
+    i_device_id varchar(64),
+    i_app_name varchar(255)
+    i_app_version varchar(255)
+)
+BEGIN
+
+    START TRANSACTION;
+
+    INSERT INTO app_list
+        (device_id, app_name, app_version)
+    VALUES
+        (i_device_id, i_app_name, i_app_version)
+    ;
+
+    COMMIT;
+
 END
 ;;
 DELIMITER ;
