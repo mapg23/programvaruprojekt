@@ -1,3 +1,48 @@
-h1 {
-    color: green;
+body, html {
+    background-color: #003366;
 }
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    text-align: center;
+    color: #FFFFFF;
+}
+
+main a {
+    background-color: #FF8C00;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+main a:hover{
+    background-color: #FFA500;
+}
+
+
+.device-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .device-table td, .device-table th {
+    border: 1px solid #005C99;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .device-table tr:nth-child(even){background-color: #004B87;}
+
+  .device-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #007B9A;
+    color: white;
+    text-align: center;
+
+  }

@@ -7,6 +7,42 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>Server dashboard</h1>
+    <main class="main dashboard">
+        <h1>Devices</h1>
+
+        <table class="device-table">
+            <tr>
+              <th>id</th>
+              <th>Device id</th>
+              <th>OS name</th>
+              <th>Os Version</th>
+              <th>Location</th>
+              <th>Last active</th>
+              <th>Device status</th>
+              <th>View logs</th>
+              <th>Send command</th>
+              <th>View Applications</th>
+              <th>Remove</th>
+            </tr>
+            
+            <% for (const row of res) {%>
+            <tr>
+                <td><%= row.id%></td>
+                <td><%= row.device_id%></td>
+                <td><%= row.os_name%></td>
+                <td><%= row.os_version%></td>
+                <td><%= row.location%></td>
+                <td><%= row.last_active%></td>
+                <td><%= row.device_status%></td>
+              <td><a href="server/logs/<%= row.device_id %>">Logs</a></td>
+              <td><a href="server/cmd/<%= row.device_id %>">CMD</a></td>
+              <td><a href="server/apps/<%= row.device_id %>">App list</a></td>
+              <td><a href="server/remove/<%= row.device_id %>">Remove</a></td>
+            </tr>
+
+            <% };%>
+
+          </table>
+    </main>
 </body>
 </html>

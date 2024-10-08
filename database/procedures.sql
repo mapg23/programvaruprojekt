@@ -61,3 +61,18 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS get_all_devices;
+DELIMITER ;;
+CREATE PROCEDURE get_all_devices(
+)
+BEGIN
+
+    START TRANSACTION;
+        SELECT * FROM device;
+    COMMIT;
+
+END
+;;
+DELIMITER ;
