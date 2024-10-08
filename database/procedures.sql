@@ -28,7 +28,7 @@ DROP PROCEDURE IF EXISTS add_app;
 DELIMITER ;;
 CREATE PROCEDURE add_app(
     i_device_id varchar(64),
-    i_app_name varchar(255)
+    i_app_name varchar(255),
     i_app_version varchar(255)
 )
 BEGIN
@@ -41,6 +41,21 @@ BEGIN
         (i_device_id, i_app_name, i_app_version)
     ;
 
+    COMMIT;
+
+END
+;;
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS get_device;
+DELIMITER ;;
+CREATE PROCEDURE get_device(
+    i_device_id varchar(64)
+)
+BEGIN
+
+    START TRANSACTION;
+        SELECT * FROM device WHERE device_id = i_device_id;
     COMMIT;
 
 END

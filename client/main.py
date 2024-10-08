@@ -1,13 +1,16 @@
 """Main module"""
 from functools import partial
-import atexit
+import json
+import time
 
 import tkinter
 import customtkinter
+
+import device
 import utils
 import api
 
-from windows import DeviceWindow, AppWindow, CommandWindow, LogsWindow
+from windows import DeviceWindow, AppWindow, LogsWindow
 
 
 class Main(customtkinter.CTk):
@@ -21,8 +24,7 @@ class Main(customtkinter.CTk):
     windows = {
         1: DeviceWindow,
         2: AppWindow,
-        3: CommandWindow,
-        4: LogsWindow
+        3: LogsWindow
     }
 
     def __init__(self):
@@ -38,8 +40,7 @@ class Main(customtkinter.CTk):
         self.toplevel_window = None
 
         #logic
-
-        self.server_status = ""
+        self.device = device.Device(utils.get_hwid(), utils.get_os_details(), False)
         self.api = api.Api()
 
     def create_ui(self):
@@ -54,34 +55,58 @@ class Main(customtkinter.CTk):
 
         self.button_device = utils.create_button(self, "Device info", partial(self.open_window, 1))
         self.button_apps = utils.create_button(self, "App list", partial(self.open_window, 2))
-        self.button_cmd = utils.create_button(self, "Cmd", partial(self.open_window, 3))
+        self.button_upload = utils.create_button(self, "Upload file", command=self.upload_file)
         self.button_logs = utils.create_button(self, "Logs", partial(self.open_window, 4))
 
     def open_window(self, window_id):
         """Method to open window"""
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
             self.toplevel_window = self.windows[window_id](self)
+            self.toplevel_window.get_device(self.device)
+            self.toplevel_window.start()
         else:
             self.toplevel_window.focus()
 
+    def upload_file(self):
+        """Upload files"""
+        files = customtkinter.filedialog.askopenfilename()
+        print(files)
+
     def add_watchlist(self):
         """Watchlist"""
-        self.api.call_with_param("add_to_watch_list", utils.get_hwid())
+        data = json.loads(self.api.call_with_param("check_if_in_watch_list", self.device.get_id()))
+        self.device.set_in_watch_list(data['res'])
+
+        response = None
+
+        if self.device.get_watch_list_status() is False:
+            response = json.loads(self.api.call_with_param("add_to_watch_list", self.device.export_device()))
+            self.device.set_in_watch_list(True)
+
+        if response['res'] is True:
+            self.timed_notification(response["msg"], 4)
+            self.after(self.interval, self.heartbeat)
 
     def heartbeat(self):
         """Heartbeat method"""
-        self.server_status = self.api.call_heart_beat(utils.get_hwid())
-        self.server_status_label.configure(text=f"Server status: {self.server_status}")
-        # self.after(self.interval, f"Server status: {self.server_status}")
+        print("heartbeat")
 
     def on_dispose(self):
         """Exit method"""
         print("exit")
 
+    def timed_notification(self, text, timer):
+        """Shows a notification x seconds."""
+        self.notification_label.configure(text=text)
+        self.after(timer * 1000, self.clear_notification)
+
+    def clear_notification(self):
+        """Clears notification"""
+        self.notification_label.configure(text="")
+
 if __name__ == '__main__':
     app = Main()
     try:
-        app.after(app.interval, app.heartbeat)
         app.mainloop()
     finally:
         app.on_dispose()

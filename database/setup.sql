@@ -1,8 +1,8 @@
---- Creating the database.
 DROP DATABASE IF EXISTS security_app;
 
 CREATE DATABASE security_app;
 
--- import the tables.
+USE security_app;
+
 source tables.sql;
 source procedures.sql;

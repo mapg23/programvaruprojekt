@@ -21,4 +21,4 @@ class DeviceListFrame(customtkinter.CTkFrame):
 
         for i, text in enumerate(self.data):
             label = customtkinter.CTkLabel(self, text=text)
-            label.grid(row=i, column=0, padx=10, pady=(10,0), sticky="w")
+            label.grid(row=i, column=0, padx=10, pady=(10,0), sticky="ew")

@@ -1,0 +1,7 @@
+{
+    "host":     "localhost",
+    "user":     "security_admin",
+    "password": "P@ssw0rd",
+    "database": "security_app",
+    "multipleStatements": true
+}

@@ -17,7 +17,8 @@ CREATE TABLE device
 DROP TABLE IF EXISTS app_list;
 CREATE TABLE app_list
 (
-    device_id varchar(64) PRIMARY KEY NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    device_id varchar(64) NOT NULL,
     app_name varchar(255) NOT NULL,
     app_version varchar(255),
 

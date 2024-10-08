@@ -1,6 +1,8 @@
 """Utils module."""
 import subprocess
 import sys
+import platform
+import requests
 
 import customtkinter
 
@@ -31,13 +33,19 @@ def get_hwid():
     if sys.platform in ['win32', 'cygwin', 'msys']:
         return run_cmd('wmic csproduct get uuid').split('\n')[2].strip()
 
-def get_os():
-    """Determines if os is of unix or windows"""
-    if sys.platform.startswith('linux'):
-        return "linux"
-    if sys.platform in ['win32', 'cygwin', 'msys']:
-        return "windows"
-    return "unknown"
+def format_version(version, os_name):
+    """Formats the version (linux exclusive)"""
+    result = ""
+    if os_name in version:
+        result = version.replace(os_name, '')
+    return result
+
+def get_os_details():
+    """Gets os information"""
+    return [
+        sys.platform,
+        format_version(platform.platform(), sys.platform)
+    ]
 
 def get_installed_apps_win():
     """Gets installed apps on Windows."""
@@ -48,9 +56,6 @@ def get_installed_apps_unix():
     apps = installed_apps.split()
 
     return apps
-
-def get_installed_apps_x():
-    """Gets installed apps on Mac OS."""
 
 def get_device_activity():
     """Gets timestamp off when device was in use"""
