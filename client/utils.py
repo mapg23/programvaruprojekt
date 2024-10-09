@@ -2,6 +2,10 @@
 import subprocess
 import sys
 import platform
+
+from urllib.request import urlopen
+import re as r
+
 import requests
 
 import customtkinter
@@ -24,6 +28,21 @@ def create_button(master, text, command=None, padx=10, pady=10):
         button.pack(padx=padx, pady=pady)
     return button
 
+def get_ip_and_location():
+    """Get ip and location"""
+    # Send request to ipinfo.io to get details based on your public IP address
+    response = requests.get('https://ipinfo.io/', timeout=2000)
+
+    if response.status_code == 200:
+        data = response.json()
+
+        country = data.get('country')  # Extract the country from the response
+        ip = data.get('ip')
+        return [ip, country]
+
+    return ["Unknown", "Unknown"]
+
+
 def get_hwid():
     """Gets os id."""
     if sys.platform.startswith('linux'):
@@ -40,12 +59,13 @@ def format_version(version, os_name):
         result = version.replace(os_name, '')
     return result
 
-def get_os_details():
-    """Gets os information"""
-    return [
-        platform.platform(),
-        platform.version()
-    ]
+def get_os_name():
+    """Gets os name"""
+    return platform.platform()
+
+def get_os_version():
+    """Gets os version"""
+    return platform.release()
 
 def get_installed_apps_win():
     """Gets installed apps on Windows."""

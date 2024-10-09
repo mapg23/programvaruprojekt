@@ -27,7 +27,8 @@ router.get('/heartbeat:device_id', (req, res) => {
 });
 
 router.get('/check_if_in_watch_list:device_id', async (req, res) => {
-    let device_id = req.params.device_id;
+    let device_id = req.params.device_id.substr(1);
+
     device_id = device_id.replace(/(\r\n|\n|\r)/gm, "");
 
     let data = await client.getDevice(device_id);
@@ -41,13 +42,13 @@ router.get('/check_if_in_watch_list:device_id', async (req, res) => {
 
 router.get('/add_to_watch_list:device', async (req, res) => {
     let device = req.params.device.substr(1);
-    
     const obj = JSON.parse(device);
+
 
     let device_id = obj.device_id;
     device_id = device_id.replace(/(\r\n|\n|\r)/gm, "");
-
-    await client.addToWatchList(device_id, obj.apps, obj.name, obj.version);
+    console.log(obj.ip_address);
+    await client.addToWatchList(device_id, obj.apps, obj.name, obj.ip_address, obj.location, obj.version);
 
     res.send({res: true, msg: 'Added to watchlist'});
 });

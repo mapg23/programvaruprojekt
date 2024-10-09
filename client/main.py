@@ -40,7 +40,7 @@ class Main(customtkinter.CTk):
         self.toplevel_window = None
 
         #logic
-        self.device = device.Device(utils.get_hwid(), utils.get_os_details(), False)
+        self.device = device.Device(utils.get_hwid(), False)
         self.api = api.Api()
 
     def create_ui(self):
@@ -83,9 +83,9 @@ class Main(customtkinter.CTk):
             response = json.loads(self.api.call_with_param("add_to_watch_list", self.device.export_device()))
             self.device.set_in_watch_list(True)
 
-        if response['res'] is True:
-            self.timed_notification(response["msg"], 4)
-            self.after(self.interval, self.heartbeat)
+            if response['res'] is True:
+                self.timed_notification(response["msg"], 4)
+                self.after(self.interval, self.heartbeat)
 
     def heartbeat(self):
         """Heartbeat method"""

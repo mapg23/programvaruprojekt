@@ -5,9 +5,10 @@ CREATE TABLE device
 (
     id INT AUTO_INCREMENT NOT NULL,
     device_id varchar(64) NOT NULL UNIQUE,
-    os_name varchar(20),
-    os_version varchar(20),
+    os_name varchar(64),
+    os_version varchar(64),
     location varchar(32),
+    ip_address varchar(32),
     last_active varchar(120),
     device_status varchar(32),   
 

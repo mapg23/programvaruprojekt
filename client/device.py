@@ -1,21 +1,29 @@
 """Device module"""
 import sys
 import json
-
+import platform
 import utils
 
 class Device:
     """Device class"""
     os_type = ""
     apps = []
+    ip_address = ""
+    os_name = ""
+    os_version = ""
+    location = ""
 
-    def __init__(self, hwid, details = ['os_name', 'os_version'], in_watch_list = False,):
+    def __init__(self, hwid, in_watch_list = False,):
         self.hwid = hwid
-        self.details = details
         self.in_watch_list = in_watch_list
 
         self.set_os_type()
         self.set_apps()
+        
+        self.os_name = utils.get_os_name()
+        self.os_version = utils.get_os_version()
+
+        self.ip_address, self.location = utils.get_ip_and_location()
 
     def set_in_watch_list(self, response):
         """Setter for watchlist"""
@@ -38,6 +46,9 @@ class Device:
             self.apps = utils.get_installed_apps_unix()
         elif self.os_type == "windows":
             self.apps = utils.get_installed_apps_win()
+    def get_ip_address(self):
+        """Getter for ip"""
+        return self.ip_address
 
     def get_id(self):
         """Getter for id."""
@@ -49,19 +60,21 @@ class Device:
 
     def get_name(self):
         """Getter for name"""
-        return self.details[0]
+        return self.os_name
 
     def get_version(self):
         """Getter for version"""
-        return self.details[1]
+        return self.os_version
 
     def export_device(self):
         """Exports class to json"""
         data = {
             "device_id": self.get_id(),
-            "apps": self.get_apps(),
             "name": self.get_name(),
-            "version": self.get_version()
+            "version": self.get_version(),
+            "ip_address": self.ip_address,
+            "location": self.location,
+            "apps": self.get_apps(),
         }
 
         return json.dumps(data)

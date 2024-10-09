@@ -12,11 +12,11 @@
 
         <table class="device-table">
             <tr>
-              <th>id</th>
               <th>Device id</th>
               <th>OS name</th>
               <th>Os Version</th>
               <th>Location</th>
+              <th>Ip</th>
               <th>Last active</th>
               <th>Device status</th>
               <th>View logs</th>
@@ -27,11 +27,11 @@
             
             <% for (const row of res) {%>
             <tr>
-                <td><%= row.id%></td>
                 <td><%= row.device_id%></td>
                 <td><%= row.os_name%></td>
                 <td><%= row.os_version%></td>
                 <td><%= row.location%></td>
+                <td><%= row.ip_address%></td>
                 <td><%= row.last_active%></td>
                 <td><%= row.device_status%></td>
               <td><a href="server/logs/<%= row.device_id %>">Logs</a></td>

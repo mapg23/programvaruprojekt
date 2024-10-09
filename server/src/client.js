@@ -18,11 +18,11 @@ let db;
     });
 })();
 
-async function add_to_watch_list(id, apps, name, version) {
-    let sql = `CALL add_device(?,?,?,?,?,?);`;
+async function add_to_watch_list(id, apps, name, ip_address, location, version) {
+    let sql = `CALL add_device(?,?,?,?,?,?,?);`;
     let res;
     
-    res = await db.query(sql, [id, name, version, 'location', 'last_active', 'device_status']);
+    res = await db.query(sql, [id, name, version, location, ip_address, 'last_active', 'device_status']);
     
     add_apps(id, apps);
 
