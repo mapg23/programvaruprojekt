@@ -1,7 +1,12 @@
 """Utils module."""
 import subprocess
 import sys
-import platform
+import platform 
+
+try:
+    from windows_tools.installed_software import get_installed_software
+except (ModuleNotFoundError) as e:
+    pass
 
 from urllib.request import urlopen
 import re as r
@@ -69,8 +74,10 @@ def get_os_version():
 
 def get_installed_apps_win():
     """Gets installed apps on Windows."""
-    installed_apps = run_cmd('wmic product get name')
-    apps = installed_apps.split()
+    apps = []
+
+    for software in get_installed_software():
+        apps.append(software['name'])
 
     return apps
 
