@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>App list</title>
+</head>
+<body>
+    <main class="main dashboard">
+        <h1>Apps</h1>
+
+        <table class="device-table">
+            <tr>
+              <th>name</th>
+            </tr>
+            
+            <% for (const row of res) {%>
+            <tr>
+                <td><%= row.app_name%></td>
+            </tr>
+
+            <% };%>
+
+          </table>
+    </main>
+</body>
+</html>

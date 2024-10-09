@@ -1,5 +1,6 @@
 USE security_app;
 
+-- Adds a device.
 DROP PROCEDURE IF EXISTS add_device;
 DELIMITER ;;
 CREATE PROCEDURE add_device(
@@ -24,6 +25,7 @@ END
 ;;
 DELIMITER ;
 
+-- Adds an app.
 DROP PROCEDURE IF EXISTS add_app;
 DELIMITER ;;
 CREATE PROCEDURE add_app(
@@ -47,6 +49,7 @@ END
 ;;
 DELIMITER ;
 
+-- Getter for specific device.
 DROP PROCEDURE IF EXISTS get_device;
 DELIMITER ;;
 CREATE PROCEDURE get_device(
@@ -62,7 +65,7 @@ END
 ;;
 DELIMITER ;
 
-
+-- Getter for all devices.
 DROP PROCEDURE IF EXISTS get_all_devices;
 DELIMITER ;;
 CREATE PROCEDURE get_all_devices(
@@ -73,6 +76,50 @@ BEGIN
         SELECT * FROM device;
     COMMIT;
 
+END
+;;
+DELIMITER ;
+
+
+-- Delete a device from app_list and device.
+DROP PROCEDURE IF EXISTS remove_device;
+DELIMITER ;;
+CREATE PROCEDURE remove_device(
+    i_device_id varchar(64)
+)
+BEGIN
+    START TRANSACTION;
+        DELETE FROM
+            app_list 
+        WHERE
+            device_id = i_device_id
+        ;
+        DELETE FROM
+            device
+        WHERE
+            device_id = i_device_id
+        ;
+    COMMIT;
+END
+;;
+DELIMITER ;
+
+
+-- Get all aps that got the same device_id.
+DROP PROCEDURE IF EXISTS get_apps;
+DELIMITER ;;
+CREATE PROCEDURE get_apps(
+    i_device_id varchar(64)
+)
+BEGIN
+    START TRANSACTION;
+        SELECT
+            *
+        FROM app_list
+        WHERE
+            device_id = i_device_id
+        ;
+    COMMIT;
 END
 ;;
 DELIMITER ;

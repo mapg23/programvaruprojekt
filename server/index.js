@@ -14,6 +14,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/client", client_route);
 app.use("/server", server_route);
 
+app.get('/', (req, res) => {
+    res.redirect('/server');
+})
+
 app.listen(port, () => {
     console.log("Listening")
 });
