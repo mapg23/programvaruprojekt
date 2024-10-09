@@ -43,8 +43,8 @@ def format_version(version, os_name):
 def get_os_details():
     """Gets os information"""
     return [
-        sys.platform,
-        format_version(platform.platform(), sys.platform)
+        platform.platform(),
+        platform.version()
     ]
 
 def get_installed_apps_win():
