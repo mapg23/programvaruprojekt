@@ -66,7 +66,7 @@ def format_version(version, os_name):
 
 def get_os_name():
     """Gets os name"""
-    return platform.platform()
+    return platform.platform().split('-')[0]
 
 def get_os_version():
     """Gets os version"""
@@ -77,6 +77,9 @@ def get_installed_apps_win():
     apps = []
 
     for software in get_installed_software():
+        if software['name'] == '':
+            continue
+
         apps.append(software['name'])
 
     return apps
