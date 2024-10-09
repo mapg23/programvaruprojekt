@@ -69,6 +69,10 @@ def get_os_version():
 
 def get_installed_apps_win():
     """Gets installed apps on Windows."""
+    installed_apps = run_cmd('wmic product get name')
+    apps = installed_apps.split()
+
+    return apps
 
 def get_installed_apps_unix():
     """Gets installed apps on Unix."""
