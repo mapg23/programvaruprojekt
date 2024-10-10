@@ -1,7 +1,6 @@
 """Device module"""
 import sys
 import json
-import platform
 import utils
 
 class Device:
@@ -19,7 +18,7 @@ class Device:
 
         self.set_os_type()
         self.set_apps()
-        
+
         self.os_name = utils.get_os_name()
         self.os_version = utils.get_os_version()
 
@@ -49,6 +48,10 @@ class Device:
     def get_ip_address(self):
         """Getter for ip"""
         return self.ip_address
+    
+    def get_location(self):
+        """Getter for location"""
+        return self.location
 
     def get_id(self):
         """Getter for id."""

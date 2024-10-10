@@ -3,13 +3,11 @@ import subprocess
 import sys
 import platform 
 
+# windows only import
 try:
     from windows_tools.installed_software import get_installed_software
-except (ModuleNotFoundError) as e:
+except (ModuleNotFoundError):
     pass
-
-from urllib.request import urlopen
-import re as r
 
 import requests
 
@@ -66,7 +64,8 @@ def format_version(version, os_name):
 
 def get_os_name():
     """Gets os name"""
-    return platform.platform().split('-')[0]
+    name = platform.platform().split('-')[0]
+    return name
 
 def get_os_version():
     """Gets os version"""

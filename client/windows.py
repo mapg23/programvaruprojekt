@@ -20,7 +20,9 @@ class DeviceWindow(customtkinter.CTkToplevel):
         """Start method"""
         data = [
             "OS: " + self.device.get_name(),
-            "Version: " + self.device.get_version()
+            "Version: " + self.device.get_version(),
+            "Ip-address:" + self.device.get_ip_address(),
+            "Location:" + self.device.get_location()
         ]
 
         self.device_frame = frames.DeviceListFrame(self, data=data)

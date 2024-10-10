@@ -4,23 +4,14 @@ const express = require("express");
 const router = express.Router();
 
 const client = require("../src/client.js");
-const Device = require("../src/device.js");
-
-const watch_list = [];
-
-function in_list(list, device_id) {
-    for (const device of list) {
-        if (device.get_id() == device_id) {
-            return true;
-        }
-    }
-    return false;
-}
 
 router.get('/', (req, res) => {
     res.send("Hello from client")
 });
 
+router.get('/server_status', (req, res) =>  {
+    res.send({res: true});
+});
 
 router.get('/heartbeat:device_id', (req, res) => {
     console.log("heartbeat");
@@ -51,6 +42,16 @@ router.get('/add_to_watch_list:device', async (req, res) => {
     await client.addToWatchList(device_id, obj.apps, obj.name, obj.ip_address, obj.location, obj.version);
 
     res.send({res: true, msg: 'Added to watchlist'});
+});
+
+router.get('/remove_from_watchlist:device_id', async (req, res) => {
+    let device_id = req.params.device_id.substr(1);
+
+    device_id = device_id.replace(/(\r\n|\n|\r)/gm, "");
+
+    await client.removeDevice(device_id);
+
+    res.send({res: true})
 });
 
 router.get('/server_status', (req, res) => {

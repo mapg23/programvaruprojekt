@@ -2,7 +2,8 @@
 
 module.exports = {
     addToWatchList: add_to_watch_list,
-    getDevice: get_device
+    getDevice: get_device,
+    removeDevice: remove_device
 };
 
 const mysql = require('promise-mysql');
@@ -39,6 +40,15 @@ async function add_apps(id, apps) {
 
 async function get_device(id) {
     let sql = `CALL get_device(?)`;
+    let res;
+
+    res = await db.query(sql, id);
+
+    return res;
+}
+
+async function remove_device(id) {
+    let sql = `CALL remove_device(?)`;
     let res;
 
     res = await db.query(sql, id);

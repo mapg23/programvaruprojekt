@@ -124,3 +124,23 @@ BEGIN
 END
 ;;
 DELIMITER ;
+
+-- Lets server know that user is online
+DROP PROCEDURE IF EXISTS update_status;
+DELIMITER ;;
+CREATE PROCEDURE update_status(
+    i_device_id varchar(64)
+)
+BEGIN
+    START TRANSACTION;
+        UPDATE
+            device
+        SET
+            last_active = NOW()
+        WHERE
+            device_id = i_device_id
+        ;
+    COMMIT;
+END
+;;
+DELIMITER ;

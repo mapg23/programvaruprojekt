@@ -1,9 +1,6 @@
 """Main module"""
 from functools import partial
 import json
-import time
-
-import tkinter
 import customtkinter
 
 import device
@@ -12,12 +9,14 @@ import api
 
 from windows import DeviceWindow, AppWindow, LogsWindow
 
-
 class Main(customtkinter.CTk):
     """Main class"""
     app_title = "Application"
     app_geometry = "800x600"
     in_watchlist = False
+
+    heartbeat_task = None
+    notifcation_task = None
 
     interval = 5000
 
@@ -34,14 +33,34 @@ class Main(customtkinter.CTk):
         # self._set_appearance_mode("dark")
         customtkinter.set_appearance_mode('dark')
         customtkinter.set_default_color_theme('dark-blue')
+        self.server_thread = None
 
         #ui
         self.create_ui()
         self.toplevel_window = None
 
         #logic
-        self.device = device.Device(utils.get_hwid(), False)
         self.api = api.Api()
+        self.device = device.Device(utils.get_hwid(), False)
+
+        utils.run_cmd('bash logs.bash')
+
+        if self.api.call_without_param("server_status") is not False:
+            self.server_status(True)
+            self.check_if_in_watch_list()
+        else:
+            self.server_status(False)
+
+
+
+    def check_if_in_watch_list(self):
+        """Checks if device already in watchlist"""
+        data = json.loads(self.api.call_with_param("check_if_in_watch_list", self.device.get_id()))
+        self.device.set_in_watch_list(data['res'])
+
+        if self.device.get_watch_list_status() is True:
+            self.update_watchlist_button()
+            self.heartbeat_task = self.after(self.interval, self.heartbeat)
 
     def create_ui(self):
         """Method to create the ui"""
@@ -74,6 +93,10 @@ class Main(customtkinter.CTk):
 
     def add_watchlist(self):
         """Watchlist"""
+        if self.api.call_without_param("server_status") is False:
+            self.timed_notification('Server is offline', 4)
+            return
+
         data = json.loads(self.api.call_with_param("check_if_in_watch_list", self.device.get_id()))
         self.device.set_in_watch_list(data['res'])
 
@@ -85,7 +108,33 @@ class Main(customtkinter.CTk):
 
             if response['res'] is True:
                 self.timed_notification(response["msg"], 4)
-                self.after(self.interval, self.heartbeat)
+                self.update_watchlist_button()
+                self.heartbeat_task = self.after(self.interval, self.heartbeat)
+
+    def remove_watchlist(self):
+        """Removes device from watchlist"""
+        if self.api.call_without_param("server_status") is False:
+            self.timed_notification('Server is offline', 4)
+            return
+
+        data = json.loads(self.api.call_with_param("remove_from_watchlist", self.device.get_id()))
+        self.device.set_in_watch_list(False)
+
+        if data['res'] is True:
+            self.timed_notification('Device removed from list', 4)
+            self.update_watchlist_button()
+            if self.heartbeat_task is not None:
+                self.after_cancel(self.heartbeat_task)
+                self.heartbeat_task = None
+
+    def update_watchlist_button(self):
+        """Updates the watchlist button"""
+        if self.device.get_watch_list_status() is True:
+            self.button_watchlist.configure(text="Remove from watchlist")
+            self.button_watchlist.configure(command=self.remove_watchlist)
+        else:
+            self.button_watchlist.configure(text="Add to watchlist")
+            self.button_watchlist.configure(command=self.add_watchlist)
 
     def heartbeat(self):
         """Heartbeat method"""
@@ -97,12 +146,23 @@ class Main(customtkinter.CTk):
 
     def timed_notification(self, text, timer):
         """Shows a notification x seconds."""
+        if self.notifcation_task is not None:
+            self.after_cancel(self.notifcation_task)
+
         self.notification_label.configure(text=text)
-        self.after(timer * 1000, self.clear_notification)
+        self.notifcation_task = self.after(timer * 1000, self.clear_notification)
 
     def clear_notification(self):
         """Clears notification"""
         self.notification_label.configure(text="")
+        self.notifcation_task = None
+
+    def server_status(self, status):
+        """Server status text"""
+        if status is True:
+            self.server_status_label.configure(text="Server: online")
+        else:
+            self.server_status_label.configure(text="Server: offline")
 
 if __name__ == '__main__':
     app = Main()
