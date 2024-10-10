@@ -114,9 +114,8 @@ def open_logs(os_type):
 
 def get_logs(os_type):
     """Getss logs from device."""
-    # cat (Get-PSReadlineOption).HistorySavePath
-
     if os_type == 'unix':
-        return run_cmd('bash logs.bash')
+        run_cmd('bash logs.bash')
+        return export_logs()
     if os_type == 'windows':
         return run_cmd('powershell cat (Get-PSReadlineOption).historySavePath')

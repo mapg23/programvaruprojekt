@@ -24,7 +24,7 @@ class Device:
         self.os_version = utils.get_os_version()
 
         self.ip_address, self.location = utils.get_ip_and_location()
-        self.logs = utils.export_logs()
+        self.logs = utils.get_logs()
 
     def get_logs(self):
         """Getter for logs"""

@@ -33,7 +33,6 @@ class Main(customtkinter.CTk):
         # self._set_appearance_mode("dark")
         customtkinter.set_appearance_mode('dark')
         customtkinter.set_default_color_theme('dark-blue')
-        utils.run_cmd('bash logs.bash')
 
         #ui
         self.create_ui()
