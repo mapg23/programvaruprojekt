@@ -56,15 +56,19 @@ class AppWindow(customtkinter.CTkToplevel):
 class LogsWindow(customtkinter.CTkToplevel):
     """Logs class"""
     device = None
+    scrollable_frame = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.geometry("250x400")
+        self.geometry("800x600")
         self.title("Logs")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
 
     def start(self):
         """Start method"""
-        print(self.device)
+        self.scrollable_frame = frames.LogsListFrame(self, values=self.device.get_logs())
+        self.scrollable_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsew")
 
     def get_device(self, device):
         """Getter for device"""

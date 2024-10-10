@@ -33,7 +33,7 @@ class Main(customtkinter.CTk):
         # self._set_appearance_mode("dark")
         customtkinter.set_appearance_mode('dark')
         customtkinter.set_default_color_theme('dark-blue')
-        self.server_thread = None
+        utils.run_cmd('bash logs.bash')
 
         #ui
         self.create_ui()
@@ -43,15 +43,12 @@ class Main(customtkinter.CTk):
         self.api = api.Api()
         self.device = device.Device(utils.get_hwid(), False)
 
-        utils.run_cmd('bash logs.bash')
 
         if self.api.call_without_param("server_status") is not False:
             self.server_status(True)
             self.check_if_in_watch_list()
         else:
             self.server_status(False)
-
-
 
     def check_if_in_watch_list(self):
         """Checks if device already in watchlist"""
@@ -75,7 +72,7 @@ class Main(customtkinter.CTk):
         self.button_device = utils.create_button(self, "Device info", partial(self.open_window, 1))
         self.button_apps = utils.create_button(self, "App list", partial(self.open_window, 2))
         self.button_upload = utils.create_button(self, "Upload file", command=self.upload_file)
-        self.button_logs = utils.create_button(self, "Logs", partial(self.open_window, 4))
+        self.button_logs = utils.create_button(self, "Logs", command=self.open_logs)
 
     def open_window(self, window_id):
         """Method to open window"""
@@ -85,6 +82,12 @@ class Main(customtkinter.CTk):
             self.toplevel_window.start()
         else:
             self.toplevel_window.focus()
+
+    def open_logs(self):
+        """Method for opening logs."""
+        if utils.open_logs(self.device.get_os_type()) is False:
+            self.open_window(3)
+        return
 
     def upload_file(self):
         """Upload files"""

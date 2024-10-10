@@ -11,6 +11,7 @@ class Device:
     os_name = ""
     os_version = ""
     location = ""
+    logs = []
 
     def __init__(self, hwid, in_watch_list = False,):
         self.hwid = hwid
@@ -23,6 +24,11 @@ class Device:
         self.os_version = utils.get_os_version()
 
         self.ip_address, self.location = utils.get_ip_and_location()
+        self.logs = utils.export_logs()
+
+    def get_logs(self):
+        """Getter for logs"""
+        return self.logs
 
     def set_in_watch_list(self, response):
         """Setter for watchlist"""
@@ -31,6 +37,10 @@ class Device:
     def get_watch_list_status(self):
         """Getter for watchlist"""
         return self.in_watch_list
+
+    def get_os_type(self):
+        """Getter for os_type."""
+        return self.os_type
 
     def set_os_type(self):
         """Determines os type"""

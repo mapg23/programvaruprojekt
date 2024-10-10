@@ -1,7 +1,8 @@
 """Utils module."""
 import subprocess
 import sys
-import platform 
+import platform
+import os
 
 # windows only import
 try:
@@ -44,7 +45,6 @@ def get_ip_and_location():
         return [ip, country]
 
     return ["Unknown", "Unknown"]
-
 
 def get_hwid():
     """Gets os id."""
@@ -93,5 +93,30 @@ def get_installed_apps_unix():
 def get_device_activity():
     """Gets timestamp off when device was in use"""
 
-def get_geolocation():
-    """Gets position of device"""
+def export_logs():
+    """Exports logs""" 
+    logs = []
+    with open("logs.txt", mode="r", encoding="utf-8") as reader:
+        logs.append(reader.readlines())
+    reader.close()
+
+    return logs
+
+def open_logs(os_type):
+    """Method to open logs with default file viewer."""
+    if os_type == 'unix':
+        run_cmd('open logs.txt')
+        return True
+    if os_type == 'windows':
+        run_cmd('start logs.txt')
+        return True
+    return False
+
+def get_logs(os_type):
+    """Getss logs from device."""
+    # cat (Get-PSReadlineOption).HistorySavePath
+
+    if os_type == 'unix':
+        return run_cmd('bash logs.bash')
+    if os_type == 'windows':
+        return run_cmd('powershell cat (Get-PSReadlineOption).historySavePath')

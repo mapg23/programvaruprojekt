@@ -22,3 +22,14 @@ class DeviceListFrame(customtkinter.CTkFrame):
         for i, text in enumerate(self.data):
             label = customtkinter.CTkLabel(self, text=text)
             label.grid(row=i, column=0, padx=10, pady=(10,0), sticky="ew")
+
+class LogsListFrame(customtkinter.CTkScrollableFrame):
+    """Logs Frame."""
+    def __init__(self, master, values):
+        super().__init__(master)
+        self.grid_columnconfigure(0, weight=1)
+        self.values = values
+
+        for i, value in enumerate(self.values):
+            label = customtkinter.CTkLabel(self, text=value)
+            label.grid(row=i, column=0, padx=10, pady=(10,0), sticky="w")
