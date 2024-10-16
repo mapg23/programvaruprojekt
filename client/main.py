@@ -42,6 +42,8 @@ class Main(customtkinter.CTk):
         self.api = api.Api()
         self.device = device.Device(utils.get_hwid(), False)
 
+        # print(type(self.device.export_logs()))
+        # print(self.device.export_logs())
 
         if self.api.call_without_param("server_status") is not False:
             self.server_status(True)

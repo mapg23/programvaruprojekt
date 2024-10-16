@@ -2,12 +2,11 @@
 import subprocess
 import sys
 import platform
-import os
 
 # windows only import
 try:
     from windows_tools.installed_software import get_installed_software
-except (ModuleNotFoundError):
+except ModuleNotFoundError:
     pass
 
 import requests
@@ -102,6 +101,12 @@ def export_logs():
 
     return logs
 
+def write_logs(logs):
+    """Writes logs (windows)."""
+    with open("logs.txt", 'w', encoding="utf-8") as writer:
+        writer.write(logs)
+    writer.close()
+
 def open_logs(os_type):
     """Method to open logs with default file viewer."""
     if os_type == 'unix':
@@ -118,4 +123,6 @@ def get_logs(os_type):
         run_cmd('bash logs.bash')
         return export_logs()
     if os_type == 'windows':
-        return run_cmd('powershell cat (Get-PSReadlineOption).historySavePath')
+        logs = run_cmd('powershell cat (Get-PSReadlineOption).historySavePath')
+        write_logs(logs)
+        return export_logs()

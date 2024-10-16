@@ -24,7 +24,7 @@ class Device:
         self.os_version = utils.get_os_version()
 
         self.ip_address, self.location = utils.get_ip_and_location()
-        self.logs = utils.get_logs()
+        self.logs = utils.get_logs(self.get_os_type())
 
     def get_logs(self):
         """Getter for logs"""
@@ -87,7 +87,16 @@ class Device:
             "version": self.get_version(),
             "ip_address": self.ip_address,
             "location": self.location,
-            "apps": self.get_apps(),
+            "apps": self.get_apps()
         }
 
+        return json.dumps(data)
+
+    def export_logs(self):
+        """Exports logs to server."""
+        new_logs = ' '.join(self.get_logs()[0])
+        data = {
+            "device_id": self.get_id(),
+            "logs": new_logs
+        }
         return json.dumps(data)
