@@ -1,0 +1,111 @@
+source .\client\.venv\bin\activate
+clear
+python .\client\.venv\bin\activate
+python .\client\.venv
+python -m .\client\.venv\bin\activate
+python -m .\client\.venv
+python -m .\client\.venv\
+python .\client\main.py
+pip install customtkinter
+pip install -r .\requirements.txt
+python .\client\main.py
+cd .\server\
+node .\index.js
+clear
+node .\index.js
+cd .\server\
+node .\index.js
+python .\client\main.py
+node .\index.js
+Get-WmiObject Win32_BaseBoard | Select-Object -ExpandProperty SerialNumber
+pip install -r .\requirements.txt
+python3 .\client\main.py
+python .\client\main.py
+python3 .\client\main.py
+python .\client\main.py
+ls
+pip install -r .\requirements.txt
+ls
+python3 .\client\main.py
+python .\client\main.py
+clear
+python .\client\main.py
+clear
+python .\client\main.py
+clear
+python .\client\main.py
+clear
+python .\client\main.py
+clear
+python .\client\main.py
+clear
+python .\client\main.py
+history
+cat (Get-PSReadlineOption).HistorySavePath
+history
+cat (Get-PSReadlineOption).HistorySavePath
+cd .\client\
+ls
+python .\main.py
+clear
+python .\main.py
+winget install Neovim.Neovim
+ls
+clear
+ls
+clear
+clear
+ls
+clear
+ls
+ls
+nvim
+cd C:\Users\macka\AppData\Local\nvim
+ls
+touch init.lua
+help
+wsl touch
+wsl touch init.lua
+ls
+ECHO >> init.lua
+ls
+cat
+cat .\init.lua
+ls
+cat init.lua
+nvim .\init.lua
+cat .\init.lua
+nvim .
+ls
+nvim .\init.lua
+ls
+nvim .-
+nvim .
+ls
+nvim .
+cd C:\Users\macka\AppData\Local\nvim
+ls
+nvim .\init.lua
+ls
+cd .\lua\
+ls
+rm 
+ls
+..
+ls
+cd ..
+ls
+rm -rf .\lazy-lock.json
+rm \lazy-lock.json
+rm .\lazy-lock.json
+ls
+cd .\lua\
+ls
+cd .\real\
+ls
+nvim .\init.lua
+ls
+cd .\client\
+python .\main.py
+pip install pystray
+python .\main.py

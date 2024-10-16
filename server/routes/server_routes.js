@@ -47,9 +47,6 @@ router.get('/logs/:device_id', async (req, res) => {
     res.render("logs", data);
 });
 
-router.get('/cmd:device_id', async (req, res) => {
-
-});
 
 router.get('/apps/:device_id', async (req, res) => {
     let device_id = req.params.device_id;

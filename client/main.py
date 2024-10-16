@@ -1,6 +1,7 @@
 """Main module"""
 from functools import partial
 import json
+import os
 import threading
 
 import customtkinter
@@ -64,8 +65,9 @@ class Main(customtkinter.CTk):
 
         # systray section
         self.menu = (
-            MenuItem('start', self.systray_start),
-            MenuItem('stop', self.systray_stop),
+            MenuItem('Add to watchlist', self.systray_start),
+            MenuItem('Remove from watchlist', self.systray_stop),
+            MenuItem('Maximize window', self.show_window),
             MenuItem('Exit', self.exit_action)
         )
         # systray icon
@@ -136,8 +138,9 @@ class Main(customtkinter.CTk):
     def upload_file(self):
         """Upload files"""
         file_path = customtkinter.filedialog.askopenfilename()
-        self.api.post_file()
-
+        file_name = os.path.basename(file_path)
+        self.api.post_file("add_file", file_path, file_name)
+        self.timed_notification('File uploaded', 4)
 
     def open_logs(self):
         """Method for opening logs."""
@@ -215,12 +218,19 @@ class Main(customtkinter.CTk):
 
     def exit_action(self, icon, item):
         """Exit the application from the system tray."""
+        self.api.call_with_param("dispose", self.device.get_id())
+        print("exit")
         self.quit()  # Close the Tkinter window
         icon.stop()  # Stop the icon
 
     def hide_window(self):
         """Hide the Tkinter window instead of closing it."""
         self.withdraw()
+
+    def show_window(self):
+        """Shows window"""
+        self.deiconify()
+
 
     def run(self):
         """Run the system tray icon and Tkinter window."""

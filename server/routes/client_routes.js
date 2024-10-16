@@ -13,9 +13,7 @@ const file_storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
-        const sanitizedData = req.body.data.trim();
-        const ending = path.extname(file.originalname);
-        const filename = sanitizedData + ending;
+        const fileName = req.body.data.trim();
         cb(null, fileName);
     }
 });

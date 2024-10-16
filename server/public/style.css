@@ -10,6 +10,10 @@ main {
     color: #FFFFFF;
 }
 
+.upload-container {
+  margin: 1rem;
+}
+
 main a {
     background-color: #FF8C00;
     border: none;

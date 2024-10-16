@@ -20,7 +20,6 @@
               <th>Last active</th>
               <th>Device status</th>
               <th>View logs</th>
-              <th>Send command</th>
               <th>View Applications</th>
               <th>Remove</th>
             </tr>
@@ -35,7 +34,6 @@
                 <td><%= row.last_active%></td>
                 <td><%= row.device_status%></td>
               <td><a href="server/logs/<%= row.device_id %>">Logs</a></td>
-              <td><a href="server/cmd/<%= row.device_id %>">CMD</a></td>
               <td><a href="server/apps/<%= row.device_id %>">App list</a></td>
               <td><a href="server/remove/<%= row.device_id %>">Remove</a></td>
             </tr>
@@ -43,6 +41,11 @@
             <% };%>
 
           </table>
-    </main>
+
+          <div class="upload-container">
+            <a href="/uploads">Uploads</a>
+          </div>
+
+        </main>
 </body>
 </html>

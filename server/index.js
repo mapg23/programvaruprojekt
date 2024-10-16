@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 8083;
+const serveIndex = require('serve-index');
+
 
 const minutes = 5, interval = minutes * 60 * 1000;
 
@@ -23,6 +25,9 @@ setInterval(function() {
 app.get('/', (req, res) => {
     res.redirect('/server');
 })
+
+app.use('/uploads', serveIndex(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.listen(port, () => {
     console.log("Listening")
