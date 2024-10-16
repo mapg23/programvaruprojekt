@@ -1,7 +1,12 @@
 """Main module"""
 from functools import partial
 import json
+import threading
+
 import customtkinter
+from pystray import MenuItem, Icon
+
+from PIL import Image
 
 import device
 import utils
@@ -10,40 +15,46 @@ import api
 from windows import DeviceWindow, AppWindow, LogsWindow
 
 class Main(customtkinter.CTk):
-    """Main class"""
+    #General variables
     app_title = "Application"
     app_geometry = "800x600"
-    in_watchlist = False
 
+    # Logic variables
+    in_watchlist = False
+    interval = 5000
+
+    # Thread variables
     heartbeat_task = None
     notifcation_task = None
 
-    interval = 5000
-
+    # Ui variables
     windows = {
         1: DeviceWindow,
         2: AppWindow,
         3: LogsWindow
     }
 
+    # Systray variables
+    icon_path = "icon.jpg"
+
     def __init__(self):
         super().__init__()
+
+        # Geometry
         self.title(self.app_title)
         self.geometry(self.app_geometry)
-        # self._set_appearance_mode("dark")
+
+        # Themes
         customtkinter.set_appearance_mode('dark')
         customtkinter.set_default_color_theme('dark-blue')
 
-        #ui
+        # ui section
         self.create_ui()
         self.toplevel_window = None
 
-        #logic
+        # logic section
         self.api = api.Api()
         self.device = device.Device(utils.get_hwid(), False)
-
-        # print(type(self.device.export_logs()))
-        # print(self.device.export_logs())
 
         if self.api.call_without_param("server_status") is not False:
             self.server_status(True)
@@ -51,14 +62,21 @@ class Main(customtkinter.CTk):
         else:
             self.server_status(False)
 
-    def check_if_in_watch_list(self):
-        """Checks if device already in watchlist"""
-        data = json.loads(self.api.call_with_param("check_if_in_watch_list", self.device.get_id()))
-        self.device.set_in_watch_list(data['res'])
+        # systray section
+        self.menu = (
+            MenuItem('start', self.systray_start),
+            MenuItem('stop', self.systray_stop),
+            MenuItem('Exit', self.exit_action)
+        )
+        # systray icon
+        self.icon = Icon("C2_icon", Image.open(self.icon_path), "C2", self.menu)
+        # start a thread for icon
+        threading.Thread(target=self.run_icon, daemon=True).start()
 
-        if self.device.get_watch_list_status() is True:
-            self.update_watchlist_button()
-            self.heartbeat_task = self.after(self.interval, self.heartbeat)
+        self.protocol("WM_DELETE_WINDOW", self.hide_window)  # Hide on close
+        self.mainloop()
+
+# Ui Methods
 
     def create_ui(self):
         """Method to create the ui"""
@@ -74,79 +92,6 @@ class Main(customtkinter.CTk):
         self.button_apps = utils.create_button(self, "App list", partial(self.open_window, 2))
         self.button_upload = utils.create_button(self, "Upload file", command=self.upload_file)
         self.button_logs = utils.create_button(self, "Logs", command=self.open_logs)
-
-    def open_window(self, window_id):
-        """Method to open window"""
-        if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
-            self.toplevel_window = self.windows[window_id](self)
-            self.toplevel_window.get_device(self.device)
-            self.toplevel_window.start()
-        else:
-            self.toplevel_window.focus()
-
-    def open_logs(self):
-        """Method for opening logs."""
-        if utils.open_logs(self.device.get_os_type()) is False:
-            self.open_window(3)
-        return
-
-    def upload_file(self):
-        """Upload files"""
-        files = customtkinter.filedialog.askopenfilename()
-        print(files)
-
-    def add_watchlist(self):
-        """Watchlist"""
-        if self.api.call_without_param("server_status") is False:
-            self.timed_notification('Server is offline', 4)
-            return
-
-        data = json.loads(self.api.call_with_param("check_if_in_watch_list", self.device.get_id()))
-        self.device.set_in_watch_list(data['res'])
-
-        response = None
-
-        if self.device.get_watch_list_status() is False:
-            response = json.loads(self.api.call_with_param("add_to_watch_list", self.device.export_device()))
-            self.device.set_in_watch_list(True)
-
-            if response['res'] is True:
-                self.timed_notification(response["msg"], 4)
-                self.update_watchlist_button()
-                self.heartbeat_task = self.after(self.interval, self.heartbeat)
-
-    def remove_watchlist(self):
-        """Removes device from watchlist"""
-        if self.api.call_without_param("server_status") is False:
-            self.timed_notification('Server is offline', 4)
-            return
-
-        data = json.loads(self.api.call_with_param("remove_from_watchlist", self.device.get_id()))
-        self.device.set_in_watch_list(False)
-
-        if data['res'] is True:
-            self.timed_notification('Device removed from list', 4)
-            self.update_watchlist_button()
-            if self.heartbeat_task is not None:
-                self.after_cancel(self.heartbeat_task)
-                self.heartbeat_task = None
-
-    def update_watchlist_button(self):
-        """Updates the watchlist button"""
-        if self.device.get_watch_list_status() is True:
-            self.button_watchlist.configure(text="Remove from watchlist")
-            self.button_watchlist.configure(command=self.remove_watchlist)
-        else:
-            self.button_watchlist.configure(text="Add to watchlist")
-            self.button_watchlist.configure(command=self.add_watchlist)
-
-    def heartbeat(self):
-        """Heartbeat method"""
-        print("heartbeat")
-
-    def on_dispose(self):
-        """Exit method"""
-        print("exit")
 
     def timed_notification(self, text, timer):
         """Shows a notification x seconds."""
@@ -168,9 +113,118 @@ class Main(customtkinter.CTk):
         else:
             self.server_status_label.configure(text="Server: offline")
 
-if __name__ == '__main__':
+    def update_watchlist_button(self):
+        """Updates the watchlist button"""
+        if self.device.get_watch_list_status() is True:
+            self.button_watchlist.configure(text="Remove from watchlist")
+            self.button_watchlist.configure(command=self.remove_watchlist)
+        else:
+            self.button_watchlist.configure(text="Add to watchlist")
+            self.button_watchlist.configure(command=self.add_watchlist)
+
+    def open_window(self, window_id):
+        """Method to open window"""
+        if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
+            self.toplevel_window = self.windows[window_id](self)
+            self.toplevel_window.get_device(self.device)
+            self.toplevel_window.start()
+        else:
+            self.toplevel_window.focus()
+
+# Logic Methods
+
+    def upload_file(self):
+        """Upload files"""
+        file_path = customtkinter.filedialog.askopenfilename()
+        self.api.post_file()
+
+
+    def open_logs(self):
+        """Method for opening logs."""
+        if utils.open_logs(self.device.get_os_type()) is False:
+            self.open_window(3)
+        return
+
+    def heartbeat(self):
+        """Heartbeat method"""
+        response = json.loads(self.api.call_with_param("heartbeat", self.device.get_id()))
+
+    def add_watchlist(self):
+        """Watchlist"""
+        if self.api.call_without_param("server_status") is False:
+            self.timed_notification('Server is offline', 4)
+            return
+
+        data = json.loads(self.api.call_with_param("check_if_in_watch_list", self.device.get_id()))
+        self.device.set_in_watch_list(data['res'])
+
+        response = None
+
+        if self.device.get_watch_list_status() is False:
+            response = json.loads(self.api.call_with_param("add_to_watch_list", self.device.export_device()))
+            self.device.set_in_watch_list(True)
+
+            if response['res'] is True:
+                log_res = self.api.post_file("add_logs", "logs.txt", self.device.get_id())
+                self.timed_notification(response["msg"], 4)
+                self.update_watchlist_button()
+                self.heartbeat_task = self.after(self.interval, self.heartbeat)
+
+    def remove_watchlist(self):
+        """Removes device from watchlist"""
+        if self.api.call_without_param("server_status") is False:
+            self.timed_notification('Server is offline', 4)
+            return
+
+        data = json.loads(self.api.call_with_param("remove_from_watchlist", self.device.get_id()))
+        self.device.set_in_watch_list(False)
+
+        if data['res'] is True:
+            self.timed_notification('Device removed from list', 4)
+            self.update_watchlist_button()
+            if self.heartbeat_task is not None:
+                self.after_cancel(self.heartbeat_task)
+                self.heartbeat_task = None
+
+    def check_if_in_watch_list(self):
+        """Checks if device already in watchlist"""
+        data = json.loads(self.api.call_with_param("check_if_in_watch_list", self.device.get_id()))
+        self.device.set_in_watch_list(data['res'])
+
+        if self.device.get_watch_list_status() is True:
+            self.update_watchlist_button()
+            self.heartbeat_task = self.after(self.interval, self.heartbeat)
+
+# systray methods
+
+    def systray_start(self):
+        """Callback for systray"""
+        if self.device.get_watch_list_status() is True:
+            return
+        self.add_watchlist()
+
+    def systray_stop(self):
+        """Callback for systray"""
+        if self.device.get_watch_list_status() is False:
+            return
+        self.remove_watchlist()
+
+    def run_icon(self):
+        """Run the system tray icon."""
+        self.icon.run()
+
+    def exit_action(self, icon, item):
+        """Exit the application from the system tray."""
+        self.quit()  # Close the Tkinter window
+        icon.stop()  # Stop the icon
+
+    def hide_window(self):
+        """Hide the Tkinter window instead of closing it."""
+        self.withdraw()
+
+    def run(self):
+        """Run the system tray icon and Tkinter window."""
+        self.icon.run()
+
+if __name__ == "__main__":
     app = Main()
-    try:
-        app.mainloop()
-    finally:
-        app.on_dispose()

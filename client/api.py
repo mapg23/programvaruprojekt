@@ -23,3 +23,15 @@ class Api:
             return req.text
         except requests.ConnectionError:
             return False
+
+    def post_file(self, route, file_path, info, timeout=2000):
+        """Calls api with a file"""
+
+        with open(file_path, 'rb') as f:
+            files = {'file': f}
+            data = {'data': info}
+            try:
+                req = requests.post(url=f"{self.BASEURL}/{route}", files=files, data=data, timeout=timeout)
+                return req
+            except requests.exceptions.RequestException:
+                return False

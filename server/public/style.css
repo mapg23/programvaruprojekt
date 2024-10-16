@@ -45,4 +45,23 @@ main a:hover{
     color: white;
     text-align: center;
 
-  }
+}
+
+.logs {
+  border: 1px solid #005C99;
+  background-color: black;
+  padding: 1rem;
+  color: rgb(0, 255, 0);
+  border-radius: 10px;
+
+}
+
+.logs p {
+  text-align: left;
+  margin: 0;
+
+}
+
+.logs h1 {
+  text-align: center;
+}

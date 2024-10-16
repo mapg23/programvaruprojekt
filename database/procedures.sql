@@ -129,14 +129,16 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS update_status;
 DELIMITER ;;
 CREATE PROCEDURE update_status(
-    i_device_id varchar(64)
+    i_device_id varchar(64),
+    i_device_status varchar(32)
 )
 BEGIN
     START TRANSACTION;
         UPDATE
             device
         SET
-            last_active = NOW()
+            last_active = NOW(),
+            device_status = i_device_status
         WHERE
             device_id = i_device_id
         ;
