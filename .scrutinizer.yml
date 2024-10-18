@@ -1,0 +1,23 @@
+imports:
+  - python
+filter:
+  excluded_paths:
+    - "database/"
+
+build:
+  nodes:
+    my-tests:
+      environment:
+        python:
+          version: 3.10
+      analysis:
+        project_setup:
+          override:
+            - "true"
+        tests:
+          override:
+            - py-scrutinizer-run
+            - command: pylint-run
+              use_website_config: false
+            - js-scrutinizer-run
+      tests: true
