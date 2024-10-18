@@ -9,7 +9,7 @@ build:
   nodes:
     my-tests:
       environment:
-        python: "3.10" # Use Python 3.10
+        python: 3.10
 
       # Use the commands key for all setup and test commands
       commands:
