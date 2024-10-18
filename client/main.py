@@ -1,4 +1,9 @@
+# pylint: disable=locally-disabled, multiple-statements, fixme, line-too-long
+# pylint: disable=import-error
+# pylint: disable=too-many-instance-attributes
+# pylint: disable=unused-argument
 """Main module"""
+
 from functools import partial
 import json
 import os
@@ -12,10 +17,11 @@ from PIL import Image
 import device
 import utils
 import api
-
 from windows import DeviceWindow, AppWindow, LogsWindow
 
 class Main(customtkinter.CTk):
+    """Main class."""
+
     #General variables
     app_title = "Application"
     app_geometry = "800x600"
@@ -36,7 +42,7 @@ class Main(customtkinter.CTk):
     }
 
     # Systray variables
-    icon_path = "client/icon.jpg"
+    icon_path = "icon.jpg"
 
     def __init__(self):
         super().__init__()
@@ -152,11 +158,10 @@ class Main(customtkinter.CTk):
         utils.append_logs("[C2]: logs opened")
         if utils.open_logs(self.device.get_os_type()) is False:
             self.open_window(3)
-        return
 
     def heartbeat(self):
         """Heartbeat method"""
-        response = json.loads(self.api.call_with_param("heartbeat", self.device.get_id()))
+        self.api.call_with_param("heartbeat", self.device.get_id())
 
     def add_watchlist(self):
         """Watchlist"""
@@ -175,7 +180,7 @@ class Main(customtkinter.CTk):
             self.device.set_in_watch_list(True)
 
             if response['res'] is True:
-                log_res = self.api.post_file("add_logs", "client/logs.txt", self.device.get_id())
+                self.api.post_file("add_logs", "logs.txt", self.device.get_id())
                 self.timed_notification(response["msg"], 4)
                 utils.append_logs(f"[C2]: {self.device.get_id()} has been added to watchlist")
                 self.update_watchlist_button()

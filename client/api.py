@@ -31,7 +31,12 @@ class Api:
             files = {'file': f}
             data = {'data': info}
             try:
-                req = requests.post(url=f"{self.BASEURL}/{route}", files=files, data=data, timeout=timeout)
+                req = requests.post(
+                    url=f"{self.BASEURL}/{route}",
+                    files=files,
+                    data=data,
+                    timeout=timeout
+                )
                 return req
             except requests.exceptions.RequestException:
                 return False

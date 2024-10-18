@@ -48,6 +48,8 @@ def get_hwid():
     if sys.platform in ['win32', 'cygwin', 'msys']:
         return run_cmd('wmic csproduct get uuid').split('\n')[2].strip()
 
+    return "Dummy hwid"
+
 def format_version(version, os_name):
     """Formats the version (linux exclusive)"""
     result = ""
@@ -64,6 +66,7 @@ def get_os_version():
     """Gets os version"""
     return platform.release()
 
+# pylint: disable=import-outside-toplevel
 def get_installed_apps_win():
     """Gets installed apps on Windows."""
     apps = []
@@ -77,6 +80,7 @@ def get_installed_apps_win():
         return apps
     except ModuleNotFoundError:
         return apps
+# pylint: enable=import-outside-toplevel
 
 def get_installed_apps_unix():
     """Gets installed apps on Unix."""
@@ -93,7 +97,7 @@ def get_installed_apps_unix():
 def open_logs(os_type):
     """Method to open logs with default file viewer."""
     if os_type == 'unix':
-        run_cmd('open client/logs.txt')
+        run_cmd('open logs.txt')
         return True
     if os_type == 'windows':
         run_cmd('start logs.txt')
@@ -102,14 +106,14 @@ def open_logs(os_type):
 
 def append_logs(text):
     """Appends logs."""
-    with open("client/logs.txt", 'a') as writer:
+    with open("logs.txt", 'a', encoding='utf-8') as writer:
         writer.write(text + "\n")
     writer.close()
 
 def export_logs():
     """Exports logs"""
     logs = []
-    with open("client/logs.txt", mode="r", encoding="utf-8") as reader:
+    with open("logs.txt", mode="r", encoding="utf-8") as reader:
         logs.append(reader.readlines())
     reader.close()
 

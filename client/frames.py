@@ -1,6 +1,8 @@
 """Custom frames."""
 import customtkinter
 
+# pylint: disable=too-many-ancestors
+
 class AppListFrame(customtkinter.CTkScrollableFrame):
     """App list frame."""
     def __init__(self, master, title, values):

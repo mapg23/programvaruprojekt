@@ -1,3 +1,4 @@
+# pylint: disable=import-error, too-many-instance-attributes
 """Device module"""
 import sys
 import json
