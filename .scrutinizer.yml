@@ -9,13 +9,12 @@ build:
   nodes:
     my-tests:
       environment:
-        python: "3.10" # Specify Python version
+        python: "3.10" # Use Python 3.10
 
-      # Project setup step (optional, based on your needs)
-      project_setup:
-        override: true
-
-      # Specify the commands or scripts to run
+      # Use the commands key for all setup and test commands
       commands:
-        - command: "python -m unittest discover -s tests" # Discover and run unittests
-        # - command: "pylint . --disable=R,C" # Run pylint for linting the codebase
+        # Command to run Python's built-in unittest
+        - command: "python -m unittest discover -s tests"
+
+        # Command to run Pylint for linting the codebase
+        - command: "pylint . --disable=R,C"

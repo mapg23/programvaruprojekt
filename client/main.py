@@ -5,7 +5,7 @@ import os
 import threading
 
 import customtkinter
-from pystray import MenuItem, Icon
+from pystray import Menu, MenuItem, Icon
 
 from PIL import Image
 
@@ -36,7 +36,7 @@ class Main(customtkinter.CTk):
     }
 
     # Systray variables
-    icon_path = "icon.jpg"
+    icon_path = "client/icon.jpg"
 
     def __init__(self):
         super().__init__()
@@ -58,7 +58,6 @@ class Main(customtkinter.CTk):
         self.api = api.Api()
         self.device = device.Device(utils.get_hwid(), False)
 
-
         if self.api.call_without_param("server_status") is not False:
             utils.append_logs("[C2]: Checking server status: true")
             self.server_status(True)
@@ -68,7 +67,7 @@ class Main(customtkinter.CTk):
             self.server_status(False)
 
         # systray section
-        self.menu = (
+        self.menu = Menu(
             MenuItem('Add to watchlist', self.systray_start),
             MenuItem('Remove from watchlist', self.systray_stop),
             MenuItem('Maximize window', self.show_window),
@@ -77,6 +76,7 @@ class Main(customtkinter.CTk):
         # systray icon
         self.icon = Icon("C2_icon", Image.open(self.icon_path), "C2", self.menu)
         # start a thread for icon
+
         threading.Thread(target=self.run_icon, daemon=True).start()
 
         self.protocol("WM_DELETE_WINDOW", self.hide_window)  # Hide on close
@@ -175,7 +175,7 @@ class Main(customtkinter.CTk):
             self.device.set_in_watch_list(True)
 
             if response['res'] is True:
-                log_res = self.api.post_file("add_logs", "logs.txt", self.device.get_id())
+                log_res = self.api.post_file("add_logs", "client/logs.txt", self.device.get_id())
                 self.timed_notification(response["msg"], 4)
                 utils.append_logs(f"[C2]: {self.device.get_id()} has been added to watchlist")
                 self.update_watchlist_button()
@@ -234,7 +234,7 @@ class Main(customtkinter.CTk):
         """Exit the application from the system tray."""
         self.api.call_with_param("dispose", self.device.get_id())
         self.quit()  # Close the gui
-        icon.stop()  # Stop the systray
+        self.icon.stop()  # Stop the systray
 
     def hide_window(self):
         """Hide the window instead of closing it."""

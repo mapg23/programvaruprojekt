@@ -93,7 +93,7 @@ def get_installed_apps_unix():
 def open_logs(os_type):
     """Method to open logs with default file viewer."""
     if os_type == 'unix':
-        run_cmd('open logs.txt')
+        run_cmd('open client/logs.txt')
         return True
     if os_type == 'windows':
         run_cmd('start logs.txt')
@@ -102,14 +102,14 @@ def open_logs(os_type):
 
 def append_logs(text):
     """Appends logs."""
-    with open("logs.txt", 'a') as writer:
+    with open("client/logs.txt", 'a') as writer:
         writer.write(text + "\n")
     writer.close()
 
 def export_logs():
     """Exports logs"""
     logs = []
-    with open("logs.txt", mode="r", encoding="utf-8") as reader:
+    with open("client/logs.txt", mode="r", encoding="utf-8") as reader:
         logs.append(reader.readlines())
     reader.close()
 
