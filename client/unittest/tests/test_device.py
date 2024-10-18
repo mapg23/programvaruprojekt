@@ -32,11 +32,9 @@ class TestDevice(unittest.TestCase):
     @patch('sys.platform', 'win32')
     def test_get_os_type_windows(self):
         """Tests device get os type."""
-
         device = Device("Hwid", False)
         device.set_os_type()
         self.assertEqual(device.get_os_type(), 'windows')
-
 
     @patch('sys.platform', 'linux')
     def test_get_os_type_linux(self):
