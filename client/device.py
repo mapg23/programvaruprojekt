@@ -24,7 +24,11 @@ class Device:
         self.os_version = utils.get_os_version()
 
         self.ip_address, self.location = utils.get_ip_and_location()
-        self.logs = utils.get_logs(self.get_os_type())
+        self.logs = utils.export_logs()
+
+        utils.append_logs(f"[C2]: getting ip: {self.ip_address}")
+        utils.append_logs(f"[C2]: getting location: {self.location}")
+        utils.append_logs(f"[C2]: System type: {self.os_name}, Version: {self.os_version}")
 
     def get_logs(self):
         """Getter for logs"""
@@ -58,7 +62,7 @@ class Device:
     def get_ip_address(self):
         """Getter for ip"""
         return self.ip_address
-    
+
     def get_location(self):
         """Getter for location"""
         return self.location

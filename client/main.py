@@ -49,6 +49,7 @@ class Main(customtkinter.CTk):
         customtkinter.set_appearance_mode('dark')
         customtkinter.set_default_color_theme('dark-blue')
 
+        utils.append_logs("[C2]: initialized")
         # ui section
         self.create_ui()
         self.toplevel_window = None
@@ -57,10 +58,13 @@ class Main(customtkinter.CTk):
         self.api = api.Api()
         self.device = device.Device(utils.get_hwid(), False)
 
+
         if self.api.call_without_param("server_status") is not False:
+            utils.append_logs("[C2]: Checking server status: true")
             self.server_status(True)
             self.check_if_in_watch_list()
         else:
+            utils.append_logs("[C2]: Checking server status: false")
             self.server_status(False)
 
         # systray section
@@ -140,10 +144,12 @@ class Main(customtkinter.CTk):
         file_path = customtkinter.filedialog.askopenfilename()
         file_name = os.path.basename(file_path)
         self.api.post_file("add_file", file_path, file_name)
+        utils.append_logs(f"[C2]: file: {file_name}, has been uploaded to server")
         self.timed_notification('File uploaded', 4)
 
     def open_logs(self):
         """Method for opening logs."""
+        utils.append_logs("[C2]: logs opened")
         if utils.open_logs(self.device.get_os_type()) is False:
             self.open_window(3)
         return
@@ -155,6 +161,7 @@ class Main(customtkinter.CTk):
     def add_watchlist(self):
         """Watchlist"""
         if self.api.call_without_param("server_status") is False:
+            utils.append_logs("[C2]: Tried to add to watchlist error server offline")
             self.timed_notification('Server is offline', 4)
             return
 
@@ -170,12 +177,14 @@ class Main(customtkinter.CTk):
             if response['res'] is True:
                 log_res = self.api.post_file("add_logs", "logs.txt", self.device.get_id())
                 self.timed_notification(response["msg"], 4)
+                utils.append_logs(f"[C2]: {self.device.get_id()} has been added to watchlist")
                 self.update_watchlist_button()
                 self.heartbeat_task = self.after(self.interval, self.heartbeat)
 
     def remove_watchlist(self):
         """Removes device from watchlist"""
         if self.api.call_without_param("server_status") is False:
+            utils.append_logs("[C2]: Tried to remove from watchlist, erorr server offline")
             self.timed_notification('Server is offline', 4)
             return
 
@@ -184,10 +193,13 @@ class Main(customtkinter.CTk):
 
         if data['res'] is True:
             self.timed_notification('Device removed from list', 4)
+            utils.append_logs(f"[C2]: {self.device.get_id()}, have been remove from watchlist")
             self.update_watchlist_button()
+
             if self.heartbeat_task is not None:
                 self.after_cancel(self.heartbeat_task)
                 self.heartbeat_task = None
+                utils.append_logs("[C2]: Heartbeat has been removed")
 
     def check_if_in_watch_list(self):
         """Checks if device already in watchlist"""
@@ -195,6 +207,8 @@ class Main(customtkinter.CTk):
         self.device.set_in_watch_list(data['res'])
 
         if self.device.get_watch_list_status() is True:
+            utils.append_logs(f"[C2]: in watchlist as {self.device.get_id()}")
+            utils.append_logs(f"[C2]: starting heartbeat for {self.device.get_id()}")
             self.update_watchlist_button()
             self.heartbeat_task = self.after(self.interval, self.heartbeat)
 
@@ -219,21 +233,19 @@ class Main(customtkinter.CTk):
     def exit_action(self, icon, item):
         """Exit the application from the system tray."""
         self.api.call_with_param("dispose", self.device.get_id())
-        print("exit")
-        self.quit()  # Close the Tkinter window
-        icon.stop()  # Stop the icon
+        self.quit()  # Close the gui
+        icon.stop()  # Stop the systray
 
     def hide_window(self):
-        """Hide the Tkinter window instead of closing it."""
+        """Hide the window instead of closing it."""
         self.withdraw()
 
     def show_window(self):
         """Shows window"""
         self.deiconify()
 
-
     def run(self):
-        """Run the system tray icon and Tkinter window."""
+        """Run the system tray and gui window."""
         self.icon.run()
 
 if __name__ == "__main__":

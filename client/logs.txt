@@ -1,100 +1,215 @@
-node index.js
-python3 main.py
-node index.js
-python3 main.py
-node index.js
-python3 main.py
-node index.js
-python3 main.py
-node index.js
-python3 main.py
-clear
-python3 main.py
-node index.js
-python3 main.py
-node index.js
-clear
-python3 main.py
-node index.js
-..
-ls
-cd home
-ls
-cd marcus
-ls
-cd ..
-..
-ls
-cd home
-ls
-cd marcus
-ls
-cd so
-node index.js
-clear
-node index.js
-clear
-node index.js
-deactivate
-python3 main.py
-clear
-python3 main.py
-clear
-..
-ls
-..
-ls
-mkdir sandbox
-cd sandbox
-code .
-/bin/python3.11 /home/marcus/.vscode/extensions/ms-python.python-2024.16.1-linux-x64/python_files/printEnvVariablesToFile.py /home/marcus/.vscode/extensions/ms-python.python-2024.16.1-linux-x64/python_files/deactivate/zsh/envVars.txt
-python3 systray.py
-ls
-python3 systray.py
-clear
-python3 systray.py
-python3 main.py
-python3 systray.py
-clear
-python3 main.py
-clear
-python3 main.py
-clear
-python3 main.py
-clear
-python3 main.py
-/bin/python3.11 /home/marcus/.vscode/extensions/ms-python.python-2024.16.1-linux-x64/python_files/printEnvVariablesToFile.py /home/marcus/.vscode/extensions/ms-python.python-2024.16.1-linux-x64/python_files/deactivate/zsh/envVars.txt
-python3 main.py
-clear
-python3 main.py
-clear
-python3 main.py
-clear
-python3 main.py
-clear
-node index.js
-python3 main.py
-node index.js
-clear
-python3 main.py
-..
-ls
-git add .
-git commit -m "systray, client code rework, logs updated"
-git push -u origin
-nvim .
-node index.js
-ifconfig
-cd client
-python3 main.py
-ip
-hostname -I
-python3 main.py
-node index.js
-python3 main.py
-node index.js
-python3 main.py
-node index.js
-python3 main.py
-node index.js
-python3 main.py
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+[C2]: <bound method Device.get_id of <device.Device object at 0x7f35d035fdc0>>, have been remove from watchlist
+[C2]: Heartbeat has been removed
+[C2]: file: utils.py, has been uploaded to server
+[C2]: logs opened
+[C2]: 10b971ac1a304176906b1f6a23827476
+ has been added to watchlist
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: 10b971ac1a304176906b1f6a23827476
+, have been remove from watchlist
+[C2]: Heartbeat has been removed
+[C2]: 10b971ac1a304176906b1f6a23827476
+ has been added to watchlist
+[C2]: file: icon.jpg, has been uploaded to server
+[C2]: logs opened

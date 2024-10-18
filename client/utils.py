@@ -2,13 +2,6 @@
 import subprocess
 import sys
 import platform
-
-# windows only import
-try:
-    from windows_tools.installed_software import get_installed_software
-except ModuleNotFoundError:
-    pass
-
 import requests
 
 import customtkinter
@@ -75,38 +68,27 @@ def get_installed_apps_win():
     """Gets installed apps on Windows."""
     apps = []
 
-    for software in get_installed_software():
-        if software['name'] == '':
-            continue
-
-        apps.append(software['name'])
-
-    return apps
+    try:
+        from windows_tools.installed_software import get_installed_software
+        for software in get_installed_software():
+            if software['name'] == '':
+                continue
+            apps.append(software['name'])
+        return apps
+    except ModuleNotFoundError:
+        return apps
 
 def get_installed_apps_unix():
     """Gets installed apps on Unix."""
     installed_apps = run_cmd('ls /usr/share/applications')
+
+    # dummy data
+    if installed_apps is None:
+        installed_apps = "test1\ntest2"
+
     apps = installed_apps.split()
 
     return apps
-
-def get_device_activity():
-    """Gets timestamp off when device was in use"""
-
-def export_logs():
-    """Exports logs""" 
-    logs = []
-    with open("logs.txt", mode="r", encoding="utf-8") as reader:
-        logs.append(reader.readlines())
-    reader.close()
-
-    return logs
-
-def write_logs(logs):
-    """Writes logs (windows)."""
-    with open("logs.txt", 'w', encoding="utf-8") as writer:
-        writer.write(logs)
-    writer.close()
 
 def open_logs(os_type):
     """Method to open logs with default file viewer."""
@@ -118,12 +100,17 @@ def open_logs(os_type):
         return True
     return False
 
-def get_logs(os_type):
-    """Getss logs from device."""
-    if os_type == 'unix':
-        run_cmd('bash logs.bash')
-        return export_logs()
-    if os_type == 'windows':
-        logs = run_cmd('powershell cat (Get-PSReadlineOption).historySavePath')
-        write_logs(logs)
-        return export_logs()
+def append_logs(text):
+    """Appends logs."""
+    with open("logs.txt", 'a') as writer:
+        writer.write(text + "\n")
+    writer.close()
+
+def export_logs():
+    """Exports logs"""
+    logs = []
+    with open("logs.txt", mode="r", encoding="utf-8") as reader:
+        logs.append(reader.readlines())
+    reader.close()
+
+    return logs
