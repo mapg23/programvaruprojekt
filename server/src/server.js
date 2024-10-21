@@ -19,6 +19,10 @@ let db;
     });
 })();
 
+/**
+ * Method that returns all devices.
+ * @returns {Array} - Array of devices.
+ */
 async function get_all_devices() {
     let sql = `CALL get_all_devices()`;
     let res;
@@ -28,12 +32,22 @@ async function get_all_devices() {
     return res[0];
 }
 
+/**
+ * Method that removes a device from watchlist.
+ * @param {String} device_id - Device id. 
+ */
 async function remove_device(device_id) {
     let sql =`CALL remove_device(?)`;
 
     await db.query(sql, device_id);
 }
 
+/**
+ * Method that returns an array of all applications.
+ * Filtered by device_id.
+ * @param {String} device_id - Device id.
+ * @returns {Array} - Array of applications.
+ */
 async function get_all_apps(device_id) {
     let sql =`CALL get_apps(?)`;
     let res;
