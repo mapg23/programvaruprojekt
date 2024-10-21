@@ -4,15 +4,18 @@
 # pylint: disable=unused-argument
 """Main module"""
 
+# cant run systray in .venv
+
 from functools import partial
 import json
 import os
+import sys
 import threading
 
 import customtkinter
-from pystray import Menu, MenuItem, Icon
+import pystray
 
-from PIL import Image
+import PIL.Image
 
 import device
 import utils
@@ -46,10 +49,9 @@ class Main(customtkinter.CTk):
 
     def __init__(self):
         super().__init__()
-
         # Geometry
-        self.title(self.app_title)
         self.geometry(self.app_geometry)
+        self.title(self.app_title)
 
         # Themes
         customtkinter.set_appearance_mode('dark')
@@ -72,18 +74,13 @@ class Main(customtkinter.CTk):
             utils.append_logs("[C2]: Checking server status: false")
             self.server_status(False)
 
-        # systray section
-        self.menu = Menu(
-            MenuItem('Add to watchlist', self.systray_start),
-            MenuItem('Remove from watchlist', self.systray_stop),
-            MenuItem('Maximize window', self.show_window),
-            MenuItem('Exit', self.exit_action)
-        )
-        # systray icon
-        self.icon = Icon("C2_icon", Image.open(self.icon_path), "C2", self.menu)
-        # start a thread for icon
+        self.image = PIL.Image.open("icon.jpg")
+        self.tray = pystray.Icon("Tray", self.image, menu=pystray.Menu(
+            pystray.MenuItem("Unminimize", self.show_window),
+            pystray.MenuItem("Exit", self.exit_action)
+        ))
 
-        threading.Thread(target=self.run_icon, daemon=True).start()
+        threading.Thread(target=self.run, daemon=True).start()
 
         self.protocol("WM_DELETE_WINDOW", self.hide_window)  # Hide on close
         self.mainloop()
@@ -218,26 +215,13 @@ class Main(customtkinter.CTk):
             self.heartbeat_task = self.after(self.interval, self.heartbeat)
 
 # systray methods
-
-    def systray_start(self):
-        """Callback for systray"""
-        if self.device.get_watch_list_status() is True:
-            return
-        self.add_watchlist()
-
-    def systray_stop(self):
-        """Callback for systray"""
-        if self.device.get_watch_list_status() is False:
-            return
-        self.remove_watchlist()
-
-    def run_icon(self):
+    def run(self):
         """Run the system tray icon."""
-        self.icon.run()
+        self.tray.run()
 
     def exit_action(self, icon, item):
         """Exit the application from the system tray."""
-        self.api.call_with_param("dispose", self.device.get_id())
+        # self.api.call_with_param("dispose", self.device.get_id())
         self.quit()  # Close the gui
         self.icon.stop()  # Stop the systray
 
@@ -249,9 +233,18 @@ class Main(customtkinter.CTk):
         """Shows window"""
         self.deiconify()
 
-    def run(self):
-        """Run the system tray and gui window."""
-        self.icon.run()
-
 if __name__ == "__main__":
-    app = Main()
+    LOCKFILE = "/tmp/security_app.lock"
+    if os.path.exists(LOCKFILE):
+        sys.exit()
+
+    with open(LOCKFILE, 'w', encoding="utf-8") as writer:
+        writer.write(str(os.getpid()))
+        writer.close()
+
+    try:
+        app = Main()
+
+    finally:
+        if os.path.exists(LOCKFILE):
+            os.remove(LOCKFILE)

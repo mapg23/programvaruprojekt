@@ -358,3 +358,231 @@
 
 [C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
 
+[C2]: initialized
+[C2]: getting ip: 83.233.138.123
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: initialized
+[C2]: getting ip: 83.233.138.123
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.123
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: initialized
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: Checking server status: true
+[C2]: in watchlist as 10b971ac1a304176906b1f6a23827476
+
+[C2]: starting heartbeat for 10b971ac1a304176906b1f6a23827476
+
+[C2]: logs opened
+[C2]: 10b971ac1a304176906b1f6a23827476
+, have been remove from watchlist
+[C2]: Heartbeat has been removed
+[C2]: 10b971ac1a304176906b1f6a23827476
+ has been added to watchlist
+[C2]: file: windows.py, has been uploaded to server
