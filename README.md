@@ -1,37 +1,102 @@
-## Install client
-- Client packages needed
+# C2 Application
+
+## Introduction
+
+The C2 Application consists of a server, client and database.
+
+The client is a GUI application made in python that also works as a system tray application.
+
+The server and database runs in the terminal.
+
+Client GUI:
+
+<img src="images/client_page.png" width="200" height="250">
+<img src="images/client_info.png" width="200" height="250">
+<img src="images/client_apps.png" width="200" height="250">
+
+Client tray:
+
+<img src="images/tray.png">
+
+## How to Use
+
+### Prerequisites
 ```
-Python 3.8
-certifi==2024.8.30
-charset-normalizer==3.3.2
-customtkinter==5.2.2
-darkdetect==0.8.0
-idna==3.10
-packaging==24.1
-requests==2.32.3
-typing==3.7.4.3
-urllib3==2.2.3
-windows-tools.installed-software==0.5.4
-windows-tools.misc==1.0.0
-windows-tools.registry==1.1.0
-winregistry==1.1.1
+Mariadb: 15.^
+Python: 3.8.^
+node: 20.^
 ```
-- Installation of client packages
+#### Client:
 ```
-// Stand in client direcory (root/client)
+cd client/
 pip install -r requirements.txt
 ```
-
-- Server packages needed
+#### Server:
 ```
-"ejs: "^3.1.10",
-"express": "^4.21.0",
-"promise-mysql": "^5.2.0"
+cd server/
+npm install
 ```
-
-- Installation of server packages
+#### Database:
 ```
-// Stand in server directory (root/server)
-node install
+cd database/
+mariadb --table < user.sql
+mariadb --table < setup.sql
 ```
 
+### Build
+```
+cd client/
+pyinstaller --onefile main.py
+cd dist/
+./main
+```
+
+### Test
+```
+cd client/
+coverage run -m unittest discover -s unittest/tests
+coverage report
+```
+
+### Run
+
+#### Client:
+```
+cd client/
+python3 main.py
+```
+
+#### Server:
+```
+cd server/
+node index.js
+```
+
+#### Server GUI:
+```
+website: localhost:8084
+```
+
+## License
+
+MIT License
+
+Copyright (c) [2024] [C2 Application]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
