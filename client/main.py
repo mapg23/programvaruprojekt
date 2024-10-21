@@ -221,7 +221,8 @@ class Main(customtkinter.CTk):
 
     def exit_action(self, icon, item):
         """Exit the application from the system tray."""
-        # self.api.call_with_param("dispose", self.device.get_id())
+        utils.append_logs("[C2]: Client has gone offline")
+        self.api.call_with_param("dispose", self.device.get_id())
         self.quit()  # Close the gui
         self.icon.stop()  # Stop the systray
 

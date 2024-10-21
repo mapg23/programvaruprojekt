@@ -5,9 +5,6 @@ const app = express();
 const port = 8084;
 const serveIndex = require("serve-index");
 
-const minutes = 5,
-  interval = minutes * 60 * 1000;
-
 const client_route = require("./routes/client_routes.js");
 const server_route = require("./routes/server_routes.js");
 
@@ -18,10 +15,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/client", client_route);
 app.use("/server", server_route);
 
-setInterval(function () {
-  console.log("check");
-}, interval);
-
 app.get("/", (req, res) => {
   res.redirect("/server");
 });
@@ -30,5 +23,5 @@ app.use("/uploads", serveIndex(path.join(__dirname, "uploads")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.listen(port, () => {
-  console.log("Listening");
+  console.log(`Server started on port: ${port}`);
 });

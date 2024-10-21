@@ -99,7 +99,7 @@ class Device:
 
     def export_logs(self):
         """Exports logs to server."""
-        new_logs = ' '.join(self.get_logs()[0])
+        new_logs = ''.join(self.get_logs())
         data = {
             "device_id": self.get_id(),
             "logs": new_logs

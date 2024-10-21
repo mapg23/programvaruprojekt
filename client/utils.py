@@ -50,13 +50,6 @@ def get_hwid():
 
     return "Dummy hwid"
 
-def format_version(version, os_name):
-    """Formats the version (linux exclusive)"""
-    result = ""
-    if os_name in version:
-        result = version.replace(os_name, '')
-    return result
-
 def get_os_name():
     """Gets os name"""
     name = platform.platform().split('-')[0]
