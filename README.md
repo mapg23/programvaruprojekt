@@ -46,8 +46,8 @@ mariadb --table < setup.sql
 ### Build
 ```
 cd client/
-pyinstaller --onefile main.py
-cd dist/
+pyinstaller --add-data "icon.jpg:." main.py
+cd dist/main/
 ./main
 ```
 

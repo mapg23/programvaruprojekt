@@ -75,7 +75,12 @@ class Main(customtkinter.CTk):
             utils.append_logs("[C2]: Checking server status: false")
             self.server_status(False)
 
-        self.image = PIL.Image.open("icon.jpg")
+        if getattr(sys, 'frozen', False):
+            bundle_dir = sys._MEIPASS
+        else:
+            bundle_dir = os.path.dirname(os.path.abspath(__file__))
+
+        self.image = PIL.Image.open(os.path.join(bundle_dir, 'icon.jpg'))
         self.tray = pystray.Icon("Tray", self.image, menu=pystray.Menu(
             pystray.MenuItem("Unminimize", self.show_window),
             pystray.MenuItem("Exit", self.exit_action)
