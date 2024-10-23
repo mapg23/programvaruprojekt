@@ -1,6 +1,0 @@
-[C2 Application] initialized
-Checking server status: true
-[C2]: 10b971ac1a304176906b1f6a23827476
- is in watchlist
-[C2]: 10b971ac1a304176906b1f6a23827476
- starting heartbeat
