@@ -93,3 +93,48 @@
 [C2]: System type: Linux, Version: 5.15.0-100-generic
 [C2]: Checking server status: false
 [C2]: Client has gone offline
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic
+[C2]: getting ip: 83.233.138.155
+[C2]: getting location: SE
+[C2]: System type: Linux, Version: 5.15.0-100-generic

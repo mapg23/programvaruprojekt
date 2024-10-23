@@ -1,3 +1,0 @@
-2 hours fixing client ui
-4 hours fixing server logic and creating server ui
-5 hours fixing database, server logic, sending commands to client.

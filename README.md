@@ -58,6 +58,11 @@ coverage run -m unittest discover -s unittest/tests
 coverage report
 ```
 
+```
+cd client/
+pylint <file.py>
+```
+
 ### Run
 
 #### Client:
